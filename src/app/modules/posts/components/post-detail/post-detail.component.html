@@ -1,0 +1,8 @@
+<div *ngIf="post$ | async as post else loadingTmp">
+  <h2>{{post?.title}}</h2>
+  <p>{{post?.body}}</p>
+</div>
+
+<ng-template #loadingTmp>
+  Loading...
+</ng-template>
