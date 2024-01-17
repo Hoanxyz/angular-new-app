@@ -10,8 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import {MatButtonModule} from "@angular/material/button";
 import { ExampleContainerComponent } from './shared/components/example-container/example-container.component';
-import { DynamicContentOneComponent } from './shared/components/dynamic-content-one/dynamic-content-one.component';
-import { DynamicContentTwoComponent } from './shared/components/dynamic-content-two/dynamic-content-two.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {BirthdayRoutingModule} from "./modules/birthday/birthday-routing.module";
+import {BirthdayModule} from "./modules/birthday/birthday.module";
 
 @NgModule({
   declarations: [
@@ -19,16 +20,19 @@ import { DynamicContentTwoComponent } from './shared/components/dynamic-content-
     ConfirmDialogComponent,
     ExampleContainerComponent
   ],
-  imports: [
-    PostModule,
-    AdminModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AdminRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-  ],
+    imports: [
+      PostModule,
+      AdminModule,
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      AdminRoutingModule,
+      BrowserAnimationsModule,
+      MatButtonModule,
+      ReactiveFormsModule,
+      BirthdayModule,
+      BirthdayRoutingModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
