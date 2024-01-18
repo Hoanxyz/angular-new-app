@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
-import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/alert-dialog.component";
+import {Component, Input} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
+import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-introduce-popup',
+  templateUrl: './introduce-popup.component.html',
+  styleUrls: ['./introduce-popup.component.scss'],
   animations: [
     trigger('textChange', [
       state('start',
@@ -32,19 +33,17 @@ import {MatDialog} from "@angular/material/dialog";
     ])
   ],
 })
-export class LoginComponent {
 
-  isOpen = true;
+export class IntroducePopupComponent {
+
+  @Input() url: string | undefined;
   isChangePos = false;
-
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
-
   changeImages = true;
+  hiddenPopup = false;
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {
   }
 
@@ -60,6 +59,10 @@ export class LoginComponent {
           content: 'Xem điều bất ngờ trước đi bạn'
         }
       })
+    } else {
+      console.log('is change');
+      this.hiddenPopup = true;
+      this.router.navigate([this.url]);
     }
   }
 }

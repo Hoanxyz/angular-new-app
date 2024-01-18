@@ -1,18 +1,16 @@
-<div class="flex justify-center">
-  <div class="container overflow-hidden mx-3 md:flex flex-wrap" [ngClass]="changeImages ? 'left-panel-active' : 'right-panel-active'">
+<div class="flex justify-center custom-item-center w-full md:w-max">
+  <div class="container overflow-hidden mx-4 md:flex flex-wrap" [ngClass]="changeImages ? 'left-panel-active' : 'right-panel-active'">
     <div class="form-container px-3 pt-3">
-      <form action="#" class="pb-4 md:px-12">
-        <h2 [@textChange]="changeImages ? 'start' : 'end'">{{ changeImages ? 'Xàmers' : 'Vẫn là Xàmers'}}</h2>
+      <div class="pb-4 md:px-12 bg-white flex items-center justify-center flex-col h-full text-center">
+        <h2 class="font-medium" [@textChange]="changeImages ? 'start' : 'end'">{{ changeImages ? 'Xàmers' : 'Vẫn là Xàmers'}}</h2>
         <div class="av-container overflow-hidden">
           <a href="#" class="av bg-no-repeat bg-contain">
           </a>
           <a href="#" class="av bg-no-repeat bg-contain">
           </a>
         </div>
-        <input class="p-3 my-2 w-full border-none" type="email" placeholder="Tài khoản" />
-        <input class="p-3 my-2 w-full border-none" type="password" placeholder="Mật khẩu" />
-        <button class="font-medium mt-2">Đăng Nhập</button>
-      </form>
+        <button class="font-medium mt-2" (click)="letGo()">Get Go</button>
+      </div>
     </div>
     <div class="overlay-container overflow-hidden">
       <div class="overlay p-3">

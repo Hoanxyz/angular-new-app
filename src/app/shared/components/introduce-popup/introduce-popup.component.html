@@ -1,0 +1,26 @@
+<div [hidden]="hiddenPopup">
+  <div class="flex justify-center custom-item-center w-full md:w-max">
+    <div class="container overflow-hidden mx-4 md:flex flex-wrap" [ngClass]="changeImages ? 'left-panel-active' : 'right-panel-active'">
+      <div class="form-container px-3 pt-3">
+        <div class="pb-4 md:px-12 bg-white flex items-center justify-center flex-col h-full text-center">
+          <h2 class="font-medium" [@textChange]="changeImages ? 'start' : 'end'">{{ changeImages ? 'Xàmers' : 'Vẫn là Xàmers'}}</h2>
+          <div class="av-container overflow-hidden">
+            <a href="#" class="av bg-no-repeat bg-contain">
+            </a>
+            <a href="#" class="av bg-no-repeat bg-contain">
+            </a>
+          </div>
+          <button class="font-medium mt-2" (click)="letGo()">Get Go</button>
+        </div>
+      </div>
+      <div class="overlay-container overflow-hidden">
+        <div class="overlay p-3">
+          <div class="overlay-panel overlay-right" [@textChange]="changeImages ? 'start' : 'end'">
+            <h3 class="mb-2">{{ changeImages ? 'Bấm để thấy gì đó thú dzị ^^' : 'Ngạc nhiên chưa :)))'}}</h3>
+            <button class="ghost font-medium" (click)="changePos()">{{ changeImages ? 'Điều bất ngờ' : 'Bảo vệ mắt'}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

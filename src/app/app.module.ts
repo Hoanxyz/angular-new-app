@@ -13,27 +13,36 @@ import { ExampleContainerComponent } from './shared/components/example-container
 import {ReactiveFormsModule} from "@angular/forms";
 import {BirthdayRoutingModule} from "./modules/birthday/birthday-routing.module";
 import {BirthdayModule} from "./modules/birthday/birthday.module";
+import { AlertDialogComponent } from './shared/components/alert-dialog/alert-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {NewYearModule} from "./modules/new-year/new-year.module";
+import {NewYearRoutingModule} from "./modules/new-year/new-year-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-    ExampleContainerComponent
+    ExampleContainerComponent,
+    AlertDialogComponent
   ],
-    imports: [
-      PostModule,
-      AdminModule,
-      BrowserModule,
-      AppRoutingModule,
-      HttpClientModule,
-      AdminRoutingModule,
-      BrowserAnimationsModule,
-      MatButtonModule,
-      ReactiveFormsModule,
-      BirthdayModule,
-      BirthdayRoutingModule
-    ],
+  imports: [
+    PostModule,
+    AdminModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    AdminRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    BirthdayModule,
+    BirthdayRoutingModule,
+    MatDialogModule,
+    NewYearModule,
+    NewYearRoutingModule
+  ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
