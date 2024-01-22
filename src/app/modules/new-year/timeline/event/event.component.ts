@@ -1,5 +1,7 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Event} from "../../../../shared/models/models";
+import lgZoom from 'lightgallery/plugins/zoom';
+import { BeforeSlideDetail } from 'lightgallery/lg-events';
 
 @Component({
   selector: 'app-event',
@@ -12,6 +14,14 @@ export class EventComponent {
   @Input() noLine = false;
   @Input() event: Event | undefined;
   expand = false;
+  settings = {
+    counter: false,
+    plugins: [lgZoom]
+  };
+  onBeforeSlide = (detail: BeforeSlideDetail): void => {
+    const { index, prevIndex } = detail;
+    console.log(index, prevIndex);
+  };
   toggle() {
     this.expand = !this.expand;
     const expandedClass = "timeline__item-body--expanded";

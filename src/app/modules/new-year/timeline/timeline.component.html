@@ -1,7 +1,6 @@
 <div id="timeline" class="timeline">
-  <ng-container>
-
+  <ng-container *ngFor="let event of events; last as isLast">
+    <app-event [event]="event" [noLine]="isLast"></app-event>
   </ng-container>
-  <app-event></app-event>
-  <app-event [noLine]="true"></app-event>
+
 </div>

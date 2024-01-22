@@ -8,6 +8,7 @@ import { IntroducePageComponent } from './introduce-page/introduce-page.componen
 import { FireWorksComponent } from './shared/components/fire-works/fire-works.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { EventComponent } from './timeline/event/event.component';
+import {LightgalleryModule} from "lightgallery/angular";
 
 
 @NgModule({
@@ -20,11 +21,12 @@ import { EventComponent } from './timeline/event/event.component';
     TimelineComponent,
     EventComponent
   ],
-  imports: [
-    CommonModule,
-    NewYearRoutingModule,
-    NgOptimizedImage
-  ],
+    imports: [
+        CommonModule,
+        NewYearRoutingModule,
+        NgOptimizedImage,
+        LightgalleryModule
+    ],
   exports: [
   ]
 })

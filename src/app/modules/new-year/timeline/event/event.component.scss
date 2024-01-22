@@ -1,3 +1,6 @@
+@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lightgallery.css');
+@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lg-zoom.css');
+
 a {
   color: hsl(223,90%,50%);
   transition: color 0.3s;
@@ -123,7 +126,6 @@ body {
 .timeline__item-body-content {
   background-color: hsl(223,10%,50%,0.2);
   opacity: 0;
-  padding: 0.5em 0.75em;
   visibility: hidden;
   transition:
     opacity 0.3s cubic-bezier(0.65,0,0.35,1),
