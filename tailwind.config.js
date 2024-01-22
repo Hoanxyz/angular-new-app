@@ -6,7 +6,13 @@ module.exports = {
     "./src/**/*.{html,ts,scss}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        lobster: ['"Lobster", sans-serif'],
+        calistoga: ['"Calistoga", serif'],
+        mali: ['"Mali", cursive'],
+      }
+    },
   },
   plugins: [
     plugin(function ({ addBase, addComponents, addUtilities, theme }) {

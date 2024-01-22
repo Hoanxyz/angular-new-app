@@ -1,3 +1,9 @@
+.fireworks-wrapper {
+  background: url("https://images.unsplash.com/photo-1524334228333-0f6db392f8a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80")
+  no-repeat center center;
+  background-size: cover;
+}
+
 .fireworks {
   height: 200px;
   width: 100vw;
@@ -7,7 +13,7 @@
 }
 .fireworks .firework {
   position: relative;
-  top: 0;
+  top: 40px;
   left: 0;
   margin: 0 40px;
 }
@@ -15,7 +21,7 @@
   content: "";
   display: block;
   border-radius: 5px;
-  background-color: #daa520;
+  background-color: #fff;
   width: 2px;
   height: 0;
   will-change: transform;
@@ -67,12 +73,6 @@
   animation: explosion2 1s ease-in-out 3s infinite;
 }
 
-.fireworks .firework .explosion .spark.silver {
-  background-color: #c0c0c0;
-}
-.fireworks .firework .explosion .spark.gold {
-  background-color: #daa520;
-}
 @keyframes fireworkstart {
   0% {
     height: 0;
@@ -243,3 +243,4 @@
     }
   }
 }
+
