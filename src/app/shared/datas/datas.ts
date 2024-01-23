@@ -7,12 +7,26 @@ export const EVENTS = [
       'các bạn siêu yêu và không gian siêu chill 🥰 Team tạm thiếu bạn đã có gđình 🤣 hẹn bạn chuyến sau, nhưng ko biết là bao giờ ' +
       '<br>' +
       '<strong>- văn của Yến</strong>',
-    images: ['assets/images/picnic-1.jpg', 'assets/images/picnic-2.jpg']
+    images: ['assets/images/picnic-2.jpg', 'assets/images/picnic-1.jpg'],
+    thumbnail: 'assets/images/picnic-1.jpg'
   },
   {
-    title: 'Lên rừng nhưng không xuống biển',
-    time: '22/10/2023',
+    title: 'Đám cưới thế kỷ',
+    time: '02/12/2023',
     content: 'abcxyz',
-    images: []
+    images: ['assets/images/cuoi-yen-1.jfif', 'assets/images/cuoi-yen-2.jfif'],
+    thumbnail: 'assets/images/cuoi-yen-1.jfif'
+  },
+  {
+    title: 'Nàng kiều lỡ bước',
+    time: '02/12/2023',
+    content: 'abcxyz',
+    images: ['assets/images/cuoi-yen-1.jfif', 'assets/images/cuoi-yen-2.jfif']
+  },
+  {
+    title: 'Chấn động, chàng trai bị cô gái lừa...',
+    time: '02/12/2023',
+    content: 'abcxyz',
+    images: ['assets/images/cuoi-yen-1.jfif', 'assets/images/cuoi-yen-2.jfif']
   }
 ]

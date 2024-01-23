@@ -3,4 +3,5 @@ export interface Event {
   content: string;
   time: string;
   images?: any;
+  thumbnail?: string;
 }

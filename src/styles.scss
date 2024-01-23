@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-//@import '~lightgallery/scss/lightgallery';
+@import 'node_modules/lightgallery/scss/lightgallery-bundle';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
