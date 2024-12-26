@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PostModule} from "./modules/posts/post.module";
-import {AdminModule} from "./modules/admin/admin.module";
-import {BirthdayModule} from "./modules/birthday/birthday.module";
 import {NewYearModule} from "./modules/new-year/new-year.module";
+import {MusicSiteModule} from "./modules/music-site/music-site.module";
+import {TestModule} from "./modules/test/test.module";
+import {TourOfHeroesModule} from "./modules/tour-of-heroes/tour-of-heroes.module";
 
 const routes: Routes = [
-  {
-    path: 'posts',
-    loadChildren: () => import('./modules/posts/post.module').then((m) => PostModule)
-  },
-  {
-    path: 'admin',
-    loadChildren: () => import('./modules/admin/admin.module').then((m) => AdminModule)
-  },
-  {
-    path: 'birthday',
-    loadChildren: () => import('./modules/birthday/birthday.module').then((m) => BirthdayModule)
-  },
   {
     path: 'new-year',
     loadChildren: () => import('./modules/new-year/new-year.module').then((m) => NewYearModule)
   },
   {
+    path: 'music',
+    loadChildren: () => import('./modules/music-site/music-site.module').then((m) => MusicSiteModule)
+  },
+  {
+    path: 'test',
+    loadChildren: () => import('./modules/test/test.module').then((m) => TestModule)
+  },
+  {
+    path: 'tour-of-heroes',
+    loadChildren: () => import('./modules/tour-of-heroes/tour-of-heroes.module').then((m) => TourOfHeroesModule)
+  },
+  {
     path: '',
-    redirectTo: 'new-year/intro',
+    redirectTo: 'music',
     pathMatch: 'full'
   }
 ];

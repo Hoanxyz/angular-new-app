@@ -1,0 +1,63 @@
+<form action="" [formGroup]="updateForm">
+<!--  <div class="">-->
+<!--    <input type="file" (change)="fileChangeEvent($event)" />-->
+<!--    <div class="flex">-->
+<!--      <image-cropper class="!w-1/2"-->
+<!--        [imageChangedEvent]="imageChangedEvent"-->
+<!--        [maintainAspectRatio]="true"-->
+<!--        [aspectRatio]="4 / 3"-->
+<!--        format="png"-->
+<!--        (imageCropped)="imageCropped($event)"-->
+<!--        (imageLoaded)="imageLoaded($event)"-->
+<!--        (cropperReady)="cropperReady()"-->
+<!--        (loadImageFailed)="loadImageFailed()"-->
+<!--      ></image-cropper>-->
+<!--      <img class="!w-1/2" [src]="croppedImage"  alt=""/>-->
+<!--    </div>-->
+<!--  </div>-->
+  <div class="border-b-2 border-gray-500 mb-5">
+    <mat-form-field class="w-full my-1">
+      <mat-label class="font-mali">Email</mat-label>
+      <input class="!font-mali" matInput formControlName="email">
+<!--      <mat-error class="font-mali" *ngIf="updateForm.get('email')?.errors?.['required']">Thiếu email này chú heo con</mat-error>-->
+      <mat-error class="font-mali" *ngIf="updateForm.get('email')?.errors?.['email']">Email sai định dạng rồiiii</mat-error>
+    </mat-form-field>
+    <div class="flex my-1 justify-between w-full flex-wrap">
+      <div class="w-full md:w-1/2 md:pr-2">
+        <mat-form-field class="w-full">
+          <mat-label class="font-mali">Tên</mat-label>
+          <input class="!font-mali" matInput formControlName="lastname">
+        </mat-form-field>
+      </div>
+      <div class="w-full md:w-1/2 md:pl-2">
+        <mat-form-field class="w-full font-mali">
+          <mat-label class="font-mali">Họ</mat-label>
+          <input class="!font-mali" matInput formControlName="firstname">
+        </mat-form-field>
+      </div>
+      <div class="w-full md:w-1/2 md:pr-2">
+        <mat-form-field class="w-full my-1">
+          <mat-label>Mật khẩu mới</mat-label>
+          <input type="password" matInput formControlName="password">
+        </mat-form-field>
+      </div>
+      <div class="w-full md:w-1/2 md:pl-2">
+        <mat-form-field class="w-full my-1">
+          <mat-label>Nhập lại mật khẩu mới</mat-label>
+          <input type="password" matInput formControlName="confirmPassword">
+        </mat-form-field>
+      </div>
+      <div class="mb-2" *ngIf="(updateForm.get('confirmPassword')?.value || updateForm.get('password')?.value)
+      && updateForm.get('confirmPassword')?.errors">
+        <span class="text-red-600">Mật khẩu nhập lại không khớp rồi.</span>
+      </div>
+    </div>
+  </div>
+  <mat-form-field class="w-full my-1">
+    <mat-label>Mật khẩu hiện tại</mat-label>
+    <input type="password" matInput formControlName="oldPassword">
+    <mat-error *ngIf="updateForm.get('oldPassword')?.errors?.['required']">Thiếu mật khẩu nhé chú heo con</mat-error>
+  </mat-form-field>
+  <div *ngIf="updateForm.get('valueNotMatch')?.errors">12331</div>
+  <button mat-raised-button class="mt-2 font-mali font-semibold" (click)="update()">Cập nhật</button>
+</form>

@@ -1,0 +1,7 @@
+<app-header [title]="title" [logoutRedirect]="logoutRedirect" [logoLink]="linkLogo"
+            [loginRedirect]="logoutRedirect" [listUrls]="listUrls"></app-header>
+<div class="font-mali fixed top-0 w-full z-50 h-full" [hidden]="!openSearch">
+  <div class="mx-auto h-full">
+    <app-search-bar></app-search-bar>
+  </div>
+</div>

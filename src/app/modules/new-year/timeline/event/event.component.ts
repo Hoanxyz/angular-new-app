@@ -20,7 +20,6 @@ export class EventComponent {
   };
   onBeforeSlide = (detail: BeforeSlideDetail): void => {
     const { index, prevIndex } = detail;
-    console.log(index, prevIndex);
   };
   toggle() {
     this.expand = !this.expand;

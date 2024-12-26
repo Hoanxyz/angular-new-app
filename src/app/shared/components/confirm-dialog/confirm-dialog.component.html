@@ -1,5 +1,7 @@
-<h4>{{ data.title }}</h4>
-<div>
-  <button mat-raised-button (click)="doAction(false)">No</button>
-  <button mat-raised-button color="accent" (click)="doAction(true)">Yes</button>
+<div class="p-5">
+  <h4 class="mb-3">{{ data.title }}</h4>
+  <div>
+    <button class="mr-3" mat-raised-button (click)="doAction(false)">Không</button>
+    <button mat-raised-button color="accent" (click)="doAction(true)">Có</button>
+  </div>
 </div>

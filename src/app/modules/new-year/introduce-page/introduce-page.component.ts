@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {users} from "../../../shared/datas/datas";
 
 @Component({
   selector: 'app-introduce-page',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class IntroducePageComponent {
   urlMainPage = 'new-year/main';
+  users = users;
 }

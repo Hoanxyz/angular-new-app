@@ -1,0 +1,48 @@
+<div class="fixed bottom-0 left-0 w-full flex justify-between z-10 beautiful-bg-1 font-mali">
+  <div class="flex flex-col justify-center w-full py-3">
+    <div class="w-full">
+      <p class="text-white text-center mb-1.5" *ngIf="songPlayingName">
+        {{ songPlayingName }}
+      </p>
+    </div>
+    <div class="m-auto md:flex items-center w-fit">
+      <div class="flex justify-center px-2">
+        <div class="flex items-center">
+          <button class="flex" (click)="download()">
+            <mat-icon class="text-white">
+              download
+            </mat-icon>
+          </button>
+        </div>
+        <div class="w-1 h-full"></div>
+        <div class="flex items-center">
+          <button class="flex" (click)="preSong()">
+            <mat-icon class="text-white">skip_previous</mat-icon>
+          </button>
+        </div>
+        <div class="w-1 h-full"></div>
+        <audio class="max-w-80% md:max-w-none" #audio  src="{{ audioSource }}" [controls]="true" (ended)="handleAudioEnd()">
+        </audio>
+        <div class="w-1 h-full"></div>
+        <div class="flex items-center">
+          <button class="flex" (click)="nextSong()">
+            <mat-icon class="text-white">skip_next</mat-icon>
+          </button>
+        </div>
+        <div class="w-1 h-full"></div>
+        <div class="flex items-center">
+          <button class="flex" (click)="changePlayType()">
+            <mat-icon [class]="playMode == playModes.NoRepeat ? 'text-gray-500' : 'text-white'">
+              {{ iconPlayMode }}
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="w-full" *ngIf="songPlayingName">
+      <p class="text-white text-center mt-1.5">Danh sách đang phát:
+        {{ listName() }}
+      </p>
+    </div>
+  </div>
+</div>

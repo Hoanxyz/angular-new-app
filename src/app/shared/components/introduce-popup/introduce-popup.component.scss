@@ -24,10 +24,6 @@ button.ghost {
   border-color: #FFFFFF;
 }
 
-input {
-  background-color: #eee;
-}
-
 .container {
   background-color: #fff;
   border-radius: 10px;
@@ -144,25 +140,18 @@ input {
   margin: 20px 0;
 }
 
-.av-container a {
+.av-container .av {
   border: 1px solid #DDDDDD;
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   margin: 0 5px;
-  height: 60px;
-  width: 60px;
+  height: 68px;
+  width: 68px;
 }
 
 .av {
-  background-image: url('/assets/images/orange.png');
   -webkit-transition: background-image 0.6s ease-in-out;
   transition: background-image 0.6s ease-in-out;
-}
-
-.right-panel-active {
-  .av {
-    background-image: url("/assets/images/green.png");
-  }
 }

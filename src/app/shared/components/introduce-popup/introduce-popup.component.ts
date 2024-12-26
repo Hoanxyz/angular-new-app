@@ -2,7 +2,9 @@ import {Component, Input} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
-import {Router} from "@angular/router";
+import {NavigationExtras, Router} from "@angular/router";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Avatar, User} from "../../models/models";
 
 @Component({
   selector: 'app-introduce-popup',
@@ -36,14 +38,22 @@ import {Router} from "@angular/router";
 
 export class IntroducePopupComponent {
 
-  @Input() url: string | undefined;
+  @Input() url!: string;
+  @Input() users!: Array<User>;
+  @Input() avatars!: Array<Avatar>;
   isChangePos = false;
-  changeImages = true;
+  changeImages = false;
   hiddenPopup = false;
+  formLogin = this.fb.group({
+    userCode: [
+      '', [Validators.required]
+    ]
+  })
 
   constructor(
     public dialog: MatDialog,
-    public router: Router
+    public router: Router,
+    private fb: FormBuilder
   ) {
   }
 
@@ -60,9 +70,17 @@ export class IntroducePopupComponent {
         }
       })
     } else {
-      console.log('is change');
+      if (!this.formLogin.valid) {
+        this.formLogin.markAllAsTouched();
+        return;
+      }
       this.hiddenPopup = true;
-      this.router.navigate([this.url]);
+      const navigationExtra: NavigationExtras = {
+        queryParams: {
+          userCode: this.formLogin.get('userCode')?.value
+        }
+      }
+      this.router.navigate([this.url], navigationExtra);
     }
   }
 }

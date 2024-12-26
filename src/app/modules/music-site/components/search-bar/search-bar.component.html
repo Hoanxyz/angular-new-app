@@ -1,0 +1,18 @@
+<div class="relative h-full">
+  <div class="bg-white relative z-10 py-6">
+    <div class="max-w-screen-lg px-3 md:px-5 lg:px-8 mx-auto">
+      <div class="flex justify-between items-center">
+        <form [formGroup]="formSearch" class="w-full flex items-center">
+          <input class="w-full min-h-10" placeholder="Nhập tên bài hát" formControlName="songName" value="">
+          <button class="pl-3 flex" (click)="searchSong()">
+            <mat-icon class="scale-125">search</mat-icon>
+          </button>
+        </form>
+      </div>
+      <div class="max-w-screen-lg mx-auto">
+        <app-song-table [playFromList]="listPlay" [classAdd]="'pt-4'" [pageAble]="pageAble" [showDelete]="false"></app-song-table>
+      </div>
+    </div>
+  </div>
+  <div class="absolute top-0 left-0 w-full h-full bg-black opacity-30 cursor-pointer" (click)="closeSearch()"></div>
+</div>

@@ -1,0 +1,22 @@
+<div>
+  <mat-accordion class="example-headers-align" multi>
+    <ng-container *ngFor="let item of collections">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="mr-1">library_music</mat-icon><span class="font-semibold">{{item?.name}}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <div *ngIf="showDelete" (click)="openDialog(item.id)">
+              <mat-icon>delete</mat-icon>
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-song-table [pageAble]="{searchType: 'COLLECTION', page: 0, collectionId: item.id, size: 5}"
+                        [playFromList]="{type: listPlay.COLLECTION, name: item.name, id: item.id}">
+        </app-song-table>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+  <div *ngIf="collections.length === 0">Bạn chưa có danh sách nào cả, vào mục cá nhân để tạo nhé</div>
+</div>

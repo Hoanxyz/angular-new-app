@@ -1,0 +1,3 @@
+<input class="hidden" type="text" [formControl]="control">
+<input class="mx-2" type="text" (blur)="onBlur()" (input)="changeData($event)" #moneyInput>
+<ng-container *ngIf="control.getError('required')">Required</ng-container>

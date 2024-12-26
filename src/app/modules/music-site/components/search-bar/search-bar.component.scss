@@ -1,0 +1,13 @@
+:host ::ng-deep .mat-mdc-form-field-bottom-align::before {
+  @apply hidden;
+}
+
+input,
+input:focus {
+  border: none;
+  border-bottom: 2px solid #000;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+}

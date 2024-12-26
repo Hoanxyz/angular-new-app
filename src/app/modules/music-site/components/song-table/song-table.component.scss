@@ -1,0 +1,77 @@
+//.song-name {
+//  @apply inline-block whitespace-nowrap overflow-ellipsis overflow-hidden;
+//  max-width: 200px;
+//}
+
+//.song-name {
+//  /* animation properties */
+//  -moz-transform: translateX(100%);
+//  -webkit-transform: translateX(100%);
+//  transform: translateX(100%);
+//
+//  -moz-animation: my-animation 5s linear infinite;
+//  -webkit-animation: my-animation 5s linear infinite;
+//  animation: my-animation 5s linear infinite;
+//}
+//
+///* for Firefox */
+//@-moz-keyframes my-animation {
+//  from { -moz-transform: translateX(100%); }
+//  to { -moz-transform: translateX(-100%); }
+//}
+//
+///* for Chrome */
+//@-webkit-keyframes my-animation {
+//  from { -webkit-transform: translateX(100%); }
+//  to { -webkit-transform: translateX(-100%); }
+//}
+//
+//@keyframes my-animation {
+//  from {
+//    -moz-transform: translateX(0%);
+//    -webkit-transform: translateX(0%);
+//    transform: translateX(0%);
+//  }
+//  to {
+//    -moz-transform: translateX(-100%);
+//    -webkit-transform: translateX(-100%);
+//    transform: translateX(-100%);
+//  }
+//}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#wave {
+  height: 40px;
+  width: 40px;
+  fill: #3c62e7;
+}
+
+@for $i from 1 through 9 {
+  #Line_#{$i} {
+    animation: pulse .5s infinite;
+    animation-delay: $i * .15s;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleY(1);
+    transform-origin: 50% 50%;
+  }
+
+  50% {
+    transform: scaleY(.7);
+    transform-origin: 50% 50%;
+  }
+
+  100% {
+    transform: scaleY(1);
+    transform-origin: 50% 50%;
+  }
+}

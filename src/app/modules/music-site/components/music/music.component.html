@@ -1,0 +1,10 @@
+<div class="pb-[124px]">
+<!--  <form action="" [formGroup]="formData">-->
+<!--    <app-input-money (input)="inputChange($event)" [control]="formData.controls['money']"></app-input-money>-->
+<!--    <button (click)="show()">Show</button>-->
+<!--  </form>-->
+  <router-outlet></router-outlet>
+  <div [hidden]="window.location.href.includes('login')">
+    <app-play-bar></app-play-bar>
+  </div>
+</div>

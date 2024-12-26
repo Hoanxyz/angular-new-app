@@ -1,0 +1,23 @@
+<app-header-music></app-header-music>
+<div class="max-w-screen-xl mt-3 md:mt-8 p-3 md:p-5 mx-auto font-mali font-semibold">
+  <h1 class="font-mali text-xl md:text-3xl xl:text-4xl text-center w-full mb-3 md:mb-8">Cá nhân</h1>
+  <div class="flex justify-between flex-col md:flex-row">
+    <div class="rounded border-2 border-gray-500 p-4 h-max md:w-[350px] mb-3 md:mb-0">
+      <ng-container *ngFor="let tab of tabs">
+        <div class="cursor-pointer group pb-1.5 last:pb-0 font-semibold" (click)="changeTab(tab.tab)">
+          <span [ngClass]="currentTab === tab.tab ? '!border-gray-700' : ''"
+                class="transition inline-block border-b-2 border-white group-hover:border-gray-700">
+            {{tab.title}}
+          </span>
+        </div>
+      </ng-container>
+    </div>
+    <div class="rounded border-2 border-gray-500 p-6 md:w-[calc(100%-390px)]">
+      <ng-container [ngSwitch]="currentTab">
+        <app-music-user-info *ngSwitchCase="'user-info'" [user]="user"></app-music-user-info>
+        <app-music-user-update *ngSwitchCase="'user-update'" [user]="user"></app-music-user-update>
+        <app-music-user-collections *ngSwitchCase="'user-collections'" [user]="user"></app-music-user-collections>
+      </ng-container>
+    </div>
+  </div>
+</div>

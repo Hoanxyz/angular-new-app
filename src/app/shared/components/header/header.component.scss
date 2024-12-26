@@ -1,0 +1,6 @@
+:host ::ng-deep {
+  .mat-mdc-menu-content,
+  .mat-mdc-menu-content .mat-mdc-menu-item span.mat-mdc-menu-item-text {
+    @apply font-mali;
+  }
+}

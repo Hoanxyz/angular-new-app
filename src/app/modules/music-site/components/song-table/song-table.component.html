@@ -1,0 +1,92 @@
+<div class="{{classAdd}}" [hidden]="listSongs.length == 0">
+  <div class="mb-2">
+    <ng-container *ngFor="let song of listSongs, let i = index">
+      <div class="flex items-center mb-1.5 last:mb-0 group justify-between w-full flex-wrap md:flex-nowrap">
+        <div class="flex items-center w-[calc(100%-172px)]">
+          <button *ngIf="isLogged" class="!flex" mat-icon-button
+                  aria-label="Favorite song" matTooltip="Add To Fav" [matTooltipPosition]="'above'"
+                  (click)="addToFavor(song.id)">
+            <mat-icon [class]="isFav(song.id) ? 'text-pink-400' : 'text-gray-400'">favorite</mat-icon>
+          </button>
+          <!--        <div class="overflow-hidden mr-3 max-w-[200px]">-->
+          <!--          <p #songName class="song-name whitespace-nowrap">-->
+          <!--            {{ song.name | removeExtension }}-->
+          <!--          </p>-->
+          <!--        </div>-->
+          <p class="mr-3 song-name font-mali flex-grow whitespace-nowrap text-ellipsis overflow-hidden"
+             matTooltip="{{ song.name | removeExtension }}" [matTooltipPosition]="'above'">
+            {{ song.name | removeExtension }}
+          </p>
+        </div>
+        <div class="flex justify-end items-center flex-grow w-full md:w-auto">
+          <ng-container *ngIf="currentSongPlay === song.id && sameListPlay(currentListPlay, playFromList); else buttonPlay">
+            <div class="loader mr-2">
+              <svg id="wave" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 38.05">
+                <title>Audio Wave</title>
+                <path id="Line_1" data-name="Line 1" d="M0.91,15L0.78,15A1,1,0,0,0,0,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H0.91Z"/>
+                <path id="Line_2" data-name="Line 2" d="M6.91,9L6.78,9A1,1,0,0,0,6,10V28a1,1,0,1,0,2,0s0,0,0,0V10A1,1,0,0,0,7,9H6.91Z"/>
+                <path id="Line_3" data-name="Line 3" d="M12.91,0L12.78,0A1,1,0,0,0,12,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H12.91Z"/>
+                <path id="Line_4" data-name="Line 4" d="M18.91,10l-0.12,0A1,1,0,0,0,18,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H18.91Z"/>
+                <path id="Line_5" data-name="Line 5" d="M24.91,15l-0.12,0A1,1,0,0,0,24,16v6a1,1,0,0,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H24.91Z"/>
+                <path id="Line_6" data-name="Line 6" d="M30.91,10l-0.12,0A1,1,0,0,0,30,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H30.91Z"/>
+                <path id="Line_7" data-name="Line 7" d="M36.91,0L36.78,0A1,1,0,0,0,36,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H36.91Z"/>
+                <path id="Line_8" data-name="Line 8" d="M42.91,9L42.78,9A1,1,0,0,0,42,10V28a1,1,0,1,0,2,0s0,0,0,0V10a1,1,0,0,0-1-1H42.91Z"/>
+                <path id="Line_9" data-name="Line 9" d="M48.91,15l-0.12,0A1,1,0,0,0,48,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H48.91Z"/>
+              </svg>
+            </div>
+          </ng-container>
+          <ng-template #buttonPlay>
+            <button class="!w-8 !h-8 mr-3 hover:transform hover:scale-125" mat-fab color="accent" style="background: #459bf7;"
+                    (click)="playSong(song.id)" matTooltip="Play" [matTooltipPosition]="'above'"
+                    aria-label="Play this song">
+              <mat-icon>play_circle_outline</mat-icon>
+            </button>
+          </ng-template>
+          <button class="!w-8 !h-8 mr-2 hover:transform hover:scale-125" mat-fab color="accent" style="background: #459bf7;"
+                  (click)="downloadSong(song.id)" matTooltip="Tải về" [matTooltipPosition]="'above'"
+                  aria-label="Download this song">
+            <mat-icon>download</mat-icon>
+          </button>
+          <div *ngIf="isLogged">
+            <button class="!w-8 !h-8 mr-2 hover:transform hover:scale-125" mat-fab color="accent" style="background: #459bf7;"
+                    matTooltip="Danh sách" [matTooltipPosition]="'above'"
+                    [matMenuTriggerFor]="menu" aria-label="Add song to collection">
+              <mat-icon>library_music</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <p class="font-mali px-1 pb-1 text-center">Danh sách nhạc</p>
+              <ul class="font-mali" *ngIf="collections?.length; else emptyCollections">
+                <li *ngFor="let collection of collections">
+                  <button mat-menu-item>
+                    <mat-checkbox [className]="'font-mali'" [checked]="isInCollection(collection.id, song.id)" (click)="$event.stopPropagation()" (change)="handleAddToCollection(collection.id, song.id)" class="example-margin">
+                      {{collection.name}}
+                    </mat-checkbox>
+                  </button>
+                </li>
+              </ul>
+              <ng-template #emptyCollections>
+                <p class="font-mali">Bạn chưa có danh sách nào</p>
+              </ng-template>
+            </mat-menu>
+          </div>
+          <!--          <button *ngIf="showDelete" class="!w-8 !h-8" mat-fab color="primary" aria-label="Delete song"-->
+          <!--                  (click)="openDialog(song.id)">-->
+          <!--            <mat-icon>delete</mat-icon>-->
+          <!--          </button>-->
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div [hidden]="totalSongs <= pageAble.size">
+    <mat-paginator [length]="totalSongs"
+                   [pageSize]="pageAble.size"
+                   [pageSizeOptions]="[5, 10, 25, 50]"
+                   [pageIndex]="pageAble.page"
+                   (page)="changePage($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
+<div *ngIf="playFromList.type == listPlay.FAV && listSongs.length == 0">
+  Bạn chưa có bài hát nào trong danh sách yêu thích.
+</div>

@@ -1,0 +1,27 @@
+<div class="bg-rose-50">
+  <div class="lucky-money-wrapper px-3 pb-16 pt-20 relative">
+    <img class="z-0 absolute top-1 right-0 h-auto w-40 lg:w-60" src="assets/images/bg-new-year-4.png" alt="apricot">
+    <img class="z-0 absolute top-1 left-0 h-auto w-32 lg:w-52" src="assets/images/bg-new-year-3.png" alt="apricot">
+    <h2 class="text-center text-3xl font-sansita font-medium z-10 relative">
+      <span class="inline-block mr-3">Lì xì của</span>
+      <img class="w-20 inline-block rounded-3xl overflow-hidden" src="{{ user.avatar.normal }}" alt="{{ user.fullName }}">
+    </h2>
+    <div class="envelope mx-auto my-10 relative z-20" [ngClass]="open ? '' : 'fold'" (click)="toggle()">
+      <div class="top"></div>
+      <div class="left"></div>
+      <div class="back">
+        <div class="paper p-3">
+          <span class="line font-mali">{{ content }}</span>
+        </div>
+      </div>
+      <div class="right"></div>
+      <div class="bottom bg-cover bg-no-repeat bg-center relative">
+        <div class="custom-item-center w-full pt-8">
+<!--          <img class="w-full" src="assets/images/dragon-2.png" alt="dragon">-->
+<!--          <p class="pt-6 text-2xl font-medium text-center font-dancing text-amber-300 uppercase">Xuân giáp thìn</p>-->
+<!--          <p class="text-2xl font-medium text-center font-dancing text-amber-300 uppercase">2024</p>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div>
+  <div class="border-b-2 border-gray-500 mb-5">
+    <h3>Thêm mới danh sách</h3>
+    <form action="" [formGroup]="formData">
+      <div>
+        <mat-form-field class="w-full my-1">
+          <mat-label class="font-mali">Tên danh sách</mat-label>
+          <input class="!font-mali" matInput formControlName="name">
+          <mat-error class="font-mali" *ngIf="formData.get('name')?.errors?.['required']">Điền vào nhé</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="pb-5 text-right">
+        <button mat-raised-button class="mt-2 font-mali font-semibold" (click)="create()">Tạo</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <h3 class="mb-2">Danh sách của {{user.lastname}}</h3>
+    <app-song-collections [showDelete]="true"></app-song-collections>
+  </div>
+</div>

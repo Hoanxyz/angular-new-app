@@ -1,0 +1,49 @@
+:host ::ng-deep {
+  .mat-mdc-menu-content,
+  .mat-mdc-menu-content .mat-mdc-menu-item span.mat-mdc-menu-item-text,
+  .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control,
+  .mat-mdc-form-field-subscript-wrapper,
+  .mat-mdc-form-field-bottom-align::before,
+  .mdc-text-field--filled .mdc-floating-label,
+  .mdc-tab__text-label,
+  .mat-expansion-panel-header-title,
+  .mat-mdc-paginator-container,
+  mat-checkbox .mdc-label {
+    @apply font-mali;
+  }
+
+  .mat-expansion-indicator {
+    &::before, &::after {
+      border-color: #333333;
+    }
+  }
+
+  input[type=file], /* FF, IE7+, chrome (except button) */
+  input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
+    cursor: pointer;
+  }
+
+  .hero-profile {
+    border: 1px solid gray;
+    padding: 5px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    background-color: lightgreen;
+    color: black;
+  }
+
+  .job-ad {
+    border: 1px solid gray;
+    padding: 5px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    background-color: lightblue;
+    color: black;
+  }
+
+  .ad-banner-example {
+    width: 400px;
+  }
+}

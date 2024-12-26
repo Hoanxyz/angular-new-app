@@ -1,0 +1,9 @@
+<div>
+  <app-ad-banner [ads]="ads" *appUnless="true"></app-ad-banner>
+  <app-heroes></app-heroes>
+  <div>
+    <h2>Job Application for Heroes</h2>
+    <app-dynamic-form [questions]="questions$ | async"></app-dynamic-form>
+    <app-config></app-config>
+  </div>
+</div>

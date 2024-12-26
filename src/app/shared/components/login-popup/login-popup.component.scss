@@ -1,0 +1,195 @@
+h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 16px 0;
+}
+
+span {
+  font-size: 12px;
+}
+
+a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #FF4B2B;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: #FFFFFF;
+}
+
+form {
+  background-color: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+  height: 100%;
+  text-align: center;
+}
+
+form::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+form {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+  0 10px 10px rgba(0,0,0,0.22);
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  @apply w-full md:w-[768px] flex flex-col mx-4 md:mx-0;
+}
+
+.form-container {
+  position: relative;
+  top: 0;
+  transition: all .6s ease-in-out;
+  @apply w-1/2 md:h-full;
+}
+
+.sign-in-container {
+  left: 0;
+  @apply md:absolute;
+  z-index: 2;
+  @apply transform -translate-x-full md:translate-x-0;
+}
+
+.container.right-panel-active .sign-in-container {
+  @apply transform translate-x-0 md:translate-x-full;
+}
+
+.sign-up-container {
+  left: 0;
+  @apply md:opacity-0;
+  z-index: 1;
+  @apply transform -translate-x-full md:transform-none;
+}
+
+.container.right-panel-active .sign-up-container {
+  opacity: 1;
+  z-index: 5;
+  @media screen and (min-width: 768px) {
+    body {
+      animation: show 0.6s;
+    }
+  }
+  @apply transform translate-x-0 md:translate-x-full;
+}
+
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.overlay-container {
+  top: 0;
+  left: 50%;
+  @apply w-[200%] md:w-1/2 md:absolute -order-1 h-max md:h-full;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+  @apply md:transform -translate-x-0 md:-translate-x-full
+}
+
+.overlay {
+  background: #FF416C;
+  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #FFFFFF;
+  position: relative;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  @apply md:-left-full w-full md:w-[200%] flex py-3 md:py-0 h-max md:h-full;
+}
+
+.container.right-panel-active .overlay {
+  @apply transform -translate-x-1/2 md:translate-x-1/2;
+}
+
+.overlay-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  @apply md:absolute w-1/2 md:w-1/2 h-max md:h-full;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+  @apply transform md:-translate-x-0.5;
+}
+
+.container.right-panel-active .overlay-left {
+  transform: translateX(0);
+  @apply transform md:translate-x-0;
+}
+
+.overlay-right {
+  right: 0;
+  @apply transform md:translate-x-0;
+}
+
+.container.right-panel-active .overlay-right {
+  @apply transform md:translate-x-[20%];
+}

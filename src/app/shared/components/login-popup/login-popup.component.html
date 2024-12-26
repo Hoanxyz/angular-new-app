@@ -1,0 +1,82 @@
+<div class="font-mali">
+  <div class="flex justify-center custom-item-center w-full md:w-max relative z-40">
+    <div class="container max-h-[90vh]" [ngClass]="isSignIn ? '' : 'right-panel-active'">
+      <div class="flex w-[200%] md:block md:w-auto form-containers h-[calc(100%-170px)] md:h-auto">
+        <div class="form-container sign-up-container max-h-[90vh]">
+          <form action="" [formGroup]="registerForm" class="overflow-y-scroll">
+            <mat-form-field class="w-full my-1">
+              <mat-label>Tài khoản</mat-label>
+              <input matInput formControlName="username">
+              <mat-error *ngIf="registerForm.get('username')?.errors?.['required']">Chú heo con chưa nhập tài khoản này</mat-error>
+              <mat-error *ngIf="registerForm.get('username')?.errors?.['userExist']">Tài khoản này tồn tại rồi nhé b ơi</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full my-1">
+              <mat-label>Mật khẩu</mat-label>
+              <input type="password" autocomplete="on" matInput formControlName="password">
+              <mat-error *ngIf="registerForm.get('password')?.errors?.['required']">Chú heo con chưa nhập mật khẩu rồi</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full my-1">
+              <mat-label>Nhập lại mật khẩu</mat-label>
+              <input type="password" autocomplete="on" matInput formControlName="confirmPassword">
+            </mat-form-field>
+            <div class="mb-2" *ngIf="(registerForm.get('confirmPassword')?.value || registerForm.get('password')?.value)
+              && registerForm?.errors?.['passwordMismatch']">
+              <mat-error *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Trời ơi nhập lại mật khẩu đi</mat-error>
+              <span class="text-red-600">Mật khẩu nhập lại không khớp rồi.</span>
+            </div>
+            <mat-form-field class="w-full my-1">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+<!--              <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">Thiếu email này chú heo con</mat-error>-->
+              <mat-error *ngIf="registerForm.get('email')?.errors?.['email']">Email sai định dạng rồiiii</mat-error>
+            </mat-form-field>
+            <div class="flex my-1 justify-between w-full">
+              <div class="w-1/2 pr-2">
+                <mat-form-field class="w-full">
+                  <mat-label>Tên</mat-label>
+                  <input matInput formControlName="lastname">
+                </mat-form-field>
+              </div>
+              <div class="w-1/2 pl-2">
+                <mat-form-field class="w-full">
+                  <mat-label>Họ</mat-label>
+                  <input matInput formControlName="firstname">
+                </mat-form-field>
+              </div>
+            </div>
+            <button class="!font-medium mt-2" (click)="register()">Đăng ký</button>
+          </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="" [formGroup]="formLogin" class="flex">
+              <mat-form-field class="w-full my-1 mb-3">
+                <mat-label>Tài khoản</mat-label>
+                <input matInput formControlName="username">
+                <mat-error *ngIf="formLogin.get('username')?.errors?.['required']">Chú heo con chưa nhập tài khoản này</mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-full my-1">
+                <mat-label>Mật khẩu</mat-label>
+                <input type="password" autocomplete="on" matInput formControlName="password">
+                <mat-error *ngIf="formLogin.get('password')?.errors?.['required']">Thiếu mật khẩu nhé chú heo con</mat-error>
+              </mat-form-field>
+              <button class="!font-medium mt-2" (click)="login()">Đăng nhập</button>
+            </form>
+        </div>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h2 class="text-2xl !font-medium">Hê Nô</h2>
+            <p>Có account rùi thì đăng nhập thôi</p>
+            <button class="ghost !font-medium" id="signIn" (click)="changePos()">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h2 class="text-2xl !font-medium">Xin chào</h2>
+            <p>Chưa có account thì đăng ký nhé</p>
+            <button class="ghost !font-medium" id="signUp" (click)="changePos()">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
