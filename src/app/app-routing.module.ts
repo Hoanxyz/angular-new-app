@@ -4,6 +4,7 @@ import {NewYearModule} from "./modules/new-year/new-year.module";
 import {MusicSiteModule} from "./modules/music-site/music-site.module";
 import {TestModule} from "./modules/test/test.module";
 import {TourOfHeroesModule} from "./modules/tour-of-heroes/tour-of-heroes.module";
+import {RouterSampleModule} from "./modules/router-sample/router-sample.module";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'tour-of-heroes',
     loadChildren: () => import('./modules/tour-of-heroes/tour-of-heroes.module').then((m) => TourOfHeroesModule)
+  },
+  {
+    path: 'router-sample',
+    loadChildren: () => import('./modules/router-sample/router-sample.module').then((m) => RouterSampleModule)
   },
   {
     path: '',
