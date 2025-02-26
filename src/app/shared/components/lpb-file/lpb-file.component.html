@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-between align-items-center" [ngClass]="isUpload ? 'is-upload' : ''">
+  <div class="d-flex px-2 {{styleClasses}} py-1 w-100 d-flex align-items-center position-relative" style="min-height: 58px;">
+    <div class="w-100 d-flex justify-content-between">
+      <div class="d-flex align-items-center icon-name-size-wrapper">
+        <div class="p-1 {{styleClasses}} mr-3 d-flex align-items-center justify-content-center">
+          <mat-icon class="file-icon">{{ fileIcon }}</mat-icon>
+        </div>
+        <div class="name-size-wrapper">
+          <ng-container *ngIf="isUpload; else oldFile">
+            <div class="file-label mr-2" title="{{uploadFile.value.name}}"
+                 *ngIf="uploadFile.value.name;else uploadInputLabelElse">
+              {{ uploadFile.value.name }}
+            </div>
+            <ng-template #uploadInputLabelElse>
+              <div class="file-label mr-2" title="{{fileSizeMB !== 0 ? 'File ' + fileTypesAccept.join(', ') +' khĂ´ng quĂ¡ ' + fileSizeMB + 'MB' : ''}}">
+                {{fileSizeMB !== 0 ? 'File ' + fileTypesAccept.join(', ') +' khĂ´ng quĂ¡ ' + fileSizeMB + 'MB' : ''}}
+              </div>
+            </ng-template>
+          </ng-container>
+          <ng-template #oldFile>
+            <div class="file-label mr-2 pointer-event pointer-class font-weight-bold" title="{{uploadFile.value.name}}"
+                 (click)="handleNameClicked()" matTooltipPosition="above" role="button" matTooltip="{{nameClickText}}">
+              {{ uploadFile.value.name }}
+            </div>
+          </ng-template>
+          <div *ngIf="uploadFile.value.size && showSize" class="mt-1">
+            {{ bytesToKBytes(uploadFile.value.size) }} kb
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isUpload" class="position-relative" style="margin-right: 40px">
+        <input type="file" class="position-relative pointer-event pointer-class h-100 input-file" id="inputGroupFile"
+               [accept]="fileTypesAccept.join(', ')" [multiple]="false" #fileInput
+               aria-describedby="inputExcelFile" (change)="fileUploaded($event, fileInput)" />
+        <mat-icon class="position-absolute pointer-event pointer-class upload-icon">cloud_upload</mat-icon>
+      </div>
+    </div>
+    <div *ngIf="showDelete" (click)="handleDelete()" class="btn p-1 button-icon flex-column file-delete"
+         matTooltipPosition="above" role="button" matTooltip="XĂ³a">
+      <i role="button" class="fa d-flex align-items-center fa-trash text-danger"></i>
+    </div>
+  </div>
+</div>
+<app-validate [control]="uploadFile" error="invalidFormat"
+              [message]="'File pháº£i cĂ³ Ä‘á»‹nh dáº¡ng ' + fileTypesAccept.join(', ')"></app-validate>
+<app-validate [control]="uploadFile" error="fileSize"
+              [message]="'File khĂ´ng Ä‘Æ°á»£c lá»›n hÆ¡n ' + fileSizeMB + 'MB'"></app-validate>

@@ -6,7 +6,7 @@ import {MusicSharedService} from "../../shared/services/music-shared.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/alert-dialog.component";
 import {ListPlay} from "../../shared/constants/music.constant";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {CommonValidators} from "../../../../shared/validators/common-validator";
 
 @Component({
@@ -31,11 +31,7 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
     textSearch: ''
   }
   formUpload = this.fb.group({
-    size: [null],
-    name: [],
-    type: [null],
-  },{
-    validators: [CommonValidators.fileSizeValidator(15*1024*1024), CommonValidators.formatExcelValidator(['audio/mpeg'])]
+    file: [null],
   });
 
   constructor(
@@ -80,6 +76,8 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
   }
 
   onUpload(): void {
+    this.formUpload.markAllAsTouched();
+    return;
     if (this.formUpload.valid) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);

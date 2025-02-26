@@ -33,6 +33,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTabsModule} from "@angular/material/tabs";
 import { SongCollectionsComponent } from './components/song-collections/song-collections.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SongCollectionsComponent } from './components/song-collections/song-col
     TabPanelComponent,
     MusicUserCollectionsComponent,
     SongCollectionsComponent,
+    UploadFileComponent,
   ],
     imports: [
         CommonModule,

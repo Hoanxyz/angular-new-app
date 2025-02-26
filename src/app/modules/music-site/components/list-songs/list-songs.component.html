@@ -27,35 +27,36 @@
     </div>
     <div class="" [formGroup]="formUpload">
       <div class="mb-2">Bạn có thể tự upload bài hát hoặc liên hệ Hoàn để update bất cứ bài hát nào nhe</div>
-      <div class="flex w-fit items-center">
-        <div class="mr-3">
-          <div class="flex items-center relative w-max rounded border p-2"
-               [ngClass]="formUpload.invalid && formUpload.touched ? 'border-red-500' : 'border-gray-300'">
-            <mat-icon class="text-blue-500" style="font-size: 30px; height: 30px; width: 30px">library_music</mat-icon>
-            <div class="flex-grow-1 w-60 mx-2">
-              <div class="whitespace-nowrap text-ellipsis overflow-hidden"
-                   *ngIf="formUpload.get('name')?.value;else uploadInputLabelElse">
-                {{ formUpload.get('name')?.value}}
-              </div>
-              <ng-template #uploadInputLabelElse>
-                <div class="file-label">File không quá 15MB</div>
-              </ng-template>
-            </div>
-            <input type="file" class="" style="position: absolute;width: 40px;opacity: 0;right: 0;z-index: 1;"
-                   #uploadSong id="inputGroupFile" accept=".mp3, .mp4, .flag"
-                   aria-describedby="inputExcelFile" (change)="onInputExcelFilePicked($event, uploadSong)" />
-            <mat-icon class="text-blue-500" style="font-size: 36px; height: 36px; width: 36px; z-index: 0">cloud_upload</mat-icon>
-          </div>
-        </div>
-        <button class="!w-10 !h-10" mat-fab color="primary" (click)="onUpload()" [disabled]="!selectedFile || !formUpload.valid"
+      <app-upload-file formControlName="file"></app-upload-file>
+<!--      <div class="flex w-fit items-center">-->
+<!--        <div class="mr-3">-->
+<!--          <div class="flex items-center relative w-max rounded border p-2"-->
+<!--               [ngClass]="formUpload.invalid && formUpload.touched ? 'border-red-500' : 'border-gray-300'">-->
+<!--            <mat-icon class="text-blue-500" style="font-size: 30px; height: 30px; width: 30px">library_music</mat-icon>-->
+<!--            <div class="flex-grow-1 w-60 mx-2">-->
+<!--              <div class="whitespace-nowrap text-ellipsis overflow-hidden"-->
+<!--                   *ngIf="formUpload.get('name')?.value;else uploadInputLabelElse">-->
+<!--                {{ formUpload.get('name')?.value}}-->
+<!--              </div>-->
+<!--              <ng-template #uploadInputLabelElse>-->
+<!--                <div class="file-label">File không quá 15MB</div>-->
+<!--              </ng-template>-->
+<!--            </div>-->
+<!--            <input type="file" class="" style="position: absolute;width: 40px;opacity: 0;right: 0;z-index: 1;"-->
+<!--                   #uploadSong id="inputGroupFile" accept=".mp3, .mp4, .flag"-->
+<!--                   aria-describedby="inputExcelFile" (change)="onInputExcelFilePicked($event, uploadSong)" />-->
+<!--            <mat-icon class="text-blue-500" style="font-size: 36px; height: 36px; width: 36px; z-index: 0">cloud_upload</mat-icon>-->
+<!--          </div>-->
+<!--        </div>-->
+        <button class="!w-10 !h-10" mat-fab color="primary" (click)="onUpload()"
                 aria-label="Upload song (mp3 and m4a only)">
           <mat-icon>upload</mat-icon>
         </button>
-      </div>
-      <div class="mt-1" *ngIf="formUpload.invalid && formUpload.touched">
-        <mat-error *ngIf="formUpload.errors?.['fileSize']">Upload file be bé thôi.</mat-error>
-        <mat-error *ngIf="formUpload.errors?.['invalidFormat']">Nhầm loại file rồi bạn ơi.</mat-error>
-      </div>
+<!--      </div>-->
+<!--      <div class="mt-1" *ngIf="formUpload.invalid && formUpload.touched">-->
+<!--        <mat-error *ngIf="formUpload.errors?.['fileSize']">Upload file be bé thôi.</mat-error>-->
+<!--        <mat-error *ngIf="formUpload.errors?.['invalidFormat']">Nhầm loại file rồi bạn ơi.</mat-error>-->
+<!--      </div>-->
     </div>
   </div>
 </div>

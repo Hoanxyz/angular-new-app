@@ -1,0 +1,71 @@
+.primary-border {
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 4px;
+}
+
+:host {
+  &.ng-invalid.ng-touched,
+  &.ng-invalid.ng-dirty {
+    .primary-border {
+      border-color: #dc3545;
+    }
+  }
+}
+
+
+.file-label {
+  font-size: .9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-delete {
+  top: 2px;
+  right: 4px;
+  font-size: 22px;
+  position: absolute;
+}
+
+
+.name-size-wrapper {
+  width: calc(100% - 56px);
+}
+
+.icon-name-size-wrapper {
+  width: calc(100% - 40px);
+}
+
+.is-upload {
+  .icon-name-size-wrapper {
+    width: calc(100% - 82px);
+  }
+}
+
+.file-icon {
+  font-size: 30px;
+  height: 30px;
+  width: 30px
+}
+
+.upload-icon {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.input-file {
+  width: 40px;
+  z-index: 1;
+  opacity: 0;
+}
+
+input[type=file], /* FF, IE7+, chrome (except button) */
+input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
+  cursor: pointer;
+}

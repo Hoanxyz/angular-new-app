@@ -5,6 +5,7 @@ import {MusicSiteModule} from "./modules/music-site/music-site.module";
 import {TestModule} from "./modules/test/test.module";
 import {TourOfHeroesModule} from "./modules/tour-of-heroes/tour-of-heroes.module";
 import {RouterSampleModule} from "./modules/router-sample/router-sample.module";
+import {PageNotFoundComponent} from "./modules/router-sample/components/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {
@@ -31,11 +32,15 @@ const routes: Routes = [
     path: '',
     redirectTo: 'music',
     pathMatch: 'full'
-  }
+  },
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    // { enableTracing: true }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

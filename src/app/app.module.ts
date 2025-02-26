@@ -20,6 +20,9 @@ import { DashboardUpdateAccountComponent } from './shared/components/user-dashbo
 import { DashboardUserInfoComponent } from './shared/components/user-dashboard/dashboard-user-info/dashboard-user-info.component';
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryDataService} from "./modules/tour-of-heroes/services/in-memory-data.service";
+import { HeroesModule } from './modules/router-sample/heroes/heroes.module';
+import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import {InMemoryDataService} from "./modules/tour-of-heroes/services/in-memory-d
     DashboardUserInfoComponent
   ],
   imports: [
+    RouterModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -49,7 +54,8 @@ import {InMemoryDataService} from "./modules/tour-of-heroes/services/in-memory-d
 // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+  HeroesModule
   ],
   providers: [
     ApiService,

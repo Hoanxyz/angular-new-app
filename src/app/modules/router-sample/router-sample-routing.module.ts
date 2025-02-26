@@ -1,19 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HeroesListComponent} from "./components/heroes-list/heroes-list.component";
-import {CrisisListComponent} from "./components/crisis-list/crisis-list.component";
 import {IndexComponent} from "./components/index/index.component";
-import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {ComposeMessageComponent} from "./components/compose-message/compose-message.component";
 
 const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
     children: [
-      {path: 'crisis-list', component: CrisisListComponent},
-      {path: 'heroes-list', component: HeroesListComponent},
-      {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
-      {path: '**', component: PageNotFoundComponent}
+      {
+        path: 'compose',
+        component: ComposeMessageComponent,
+        outlet: 'popup'
+      },
+      {
+        path: 'crisis',
+        loadChildren: () => import('./crisis-center/crisis-center.module').then(m => m.CrisisCenterModule)
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+      },
+      {
+        path: 'superheroes',
+        loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule),
+        data: { preload: true }
+      },
+      {path: '', redirectTo: '/router-sample/superheroes/heroes-list', pathMatch: 'full'},
     ]
   },
 ];
