@@ -1,0 +1,203 @@
+<!--<div [formGroup]="formData">-->
+<!--  <div class="pt-3" *ngIf="requesterInfo.length > 0">-->
+<!--    <div class="dark-brown h6">ThĂ´ng tin bá»• sung:</div>-->
+<!--    <div class="primary-border p-3 mb-2">-->
+<!--      <div class="row m-0">-->
+<!--        <ng-container formArrayName="requesterInfo">-->
+<!--          <ng-container *ngFor="let info of requesterInfo.controls; let i = index;">-->
+<!--            <ng-container [formGroupName]="i">-->
+<!--              <div class="form-group col-4">-->
+<!--                <div class="col-form-label textLabel pb-1">-->
+<!--                  {{ info.controls?.title.value }} <span *ngIf="info.controls?.isRequired.value" class="text-danger">â˜…</span>-->
+<!--                </div>-->
+<!--                <div [ngSwitch]="info.controls?.type.value">-->
+<!--                  <div *ngSwitchCase="'Date'">-->
+<!--                    <app-lpb-datepicker-new [formControl]="info.controls['data']"-->
+<!--                                            [className]="formHelpers.isValidClass(info.controls.data)"></app-lpb-datepicker-new>-->
+<!--                  </div>-->
+<!--                  <div *ngSwitchCase="'Number'">-->
+<!--                    <input [placeholder]="info.controls?.title.value" type="text" JustNumberOnly formControlName="data" class="form-control"/>-->
+<!--                  </div>-->
+<!--                  <div *ngSwitchDefault>-->
+<!--                    <input [placeholder]="info.controls?.title.value" type="text" formControlName="data" class="form-control"/>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <app-validate [control]="info.controls?.data" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                </app-validate>-->
+<!--                <app-validate [control]="info.controls?.data" message="Sai Ä‘á»‹nh dáº¡ng ngĂ y" error="notDMYDate">-->
+<!--                </app-validate>-->
+<!--                <app-validate [control]="info.controls?.data" message="NgĂ y khĂ´ng tá»“n táº¡i" error="dateNotExist">-->
+<!--                </app-validate>-->
+<!--              </div>-->
+<!--            </ng-container>-->
+<!--          </ng-container>-->
+<!--        </ng-container>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="pt-4">-->
+<!--    <div class="dark-brown h6">Ná»™i dung:</div>-->
+<!--    <div class="primary-border p-3">-->
+<!--      <div class="pb-3">-->
+<!--        <div class="request-content beauty-scroll position-relative {{ canEdit ? '' : 'view-mode'}}">-->
+<!--          <div class="rq-table">-->
+<!--            <table class="table">-->
+<!--              <caption class="d-none"></caption>-->
+<!--              <thead>-->
+<!--              <tr>-->
+<!--                <th scope="col" style="width: 75px">STT</th>-->
+<!--                <th scope="col" class="sticky-left" style="width: 200px;">TĂªn Ä‘Äƒng nháº­p</th>-->
+<!--                <th scope="col" style="width: 250px;">Há» vĂ  tĂªn</th>-->
+<!--                <th scope="col" style="width: 300px;">Chá»©c danh</th>-->
+<!--                <th scope="col" style="width: 300px;">Khá»‘i</th>-->
+<!--                <th scope="col" style="width: 300px;">PhĂ²ng ban</th>-->
+<!--                <th scope="col" style="width: 300px;">Bá»™ pháº­n</th>-->
+<!--                <th scope="col" style="width: 300px;">Loáº¡i yĂªu cáº§u</th>-->
+<!--                <th scope="col">NgĂ y hiá»‡u lá»±c</th>-->
+<!--                <th scope="col" style="order: 1;">Ghi chĂº</th>-->
+<!--                <th scope="col" *ngFor="let data of processContentConfigFiltered">{{ data.title }}</th>-->
+<!--                <th *ngIf="canEdit" scope="col" class="sticky-right"-->
+<!--                    style="order: 2;min-width: unset; max-width: 75px; width: 100%; color: transparent !important;">action</th>-->
+<!--              </tr>-->
+<!--              </thead>-->
+<!--              <tbody>-->
+<!--              <tr formArrayName="processContent" *ngFor="let row of processContent.controls.slice(start, end); let i = index">-->
+<!--                <td class="align-middle px-3 justify-content-center align-items-center" style="width: 75px;">-->
+<!--                  <ng-container *ngIf="!canEdit; else nameBadge">-->
+<!--                    {{i + 1}}-->
+<!--                  </ng-container>-->
+<!--                  <ng-template #nameBadge>-->
+<!--                    <div class="" [matBadge]="row.valid ? 'check' : 'close'" [matBadgeColor]="row.valid ? 'primary' : 'warn'">-->
+<!--                      <span class="d-inline-block mx-2 my-1" style="font-size: 20px">{{i + 1}}</span>-->
+<!--                    </div>-->
+<!--                  </ng-template>-->
+<!--                </td>-->
+<!--                <ng-container [formGroupName]="i">-->
+<!--                  <td class="bg-white sticky-left" style="z-index: {{10 - i}}; width: 200px;">-->
+<!--                    <ng-container *ngIf="!id || mode === 'EDIT'; else userNameCanEdit">-->
+<!--                      <app-lpb-select2 [className]="formHelpers.isValidClass(row.controls['userName'])"-->
+<!--                                       [config]="{isNewApi: true, paging: true}"-->
+<!--                                       [apiUrl]="usersApi"-->
+<!--                                       labelName="userName" bindValue="userName" [formControl]="row.controls['userName']"-->
+<!--                                       (change)="changeUserName(i)"-->
+<!--                                       placeholder="Chá»n"></app-lpb-select2>-->
+<!--                      <app-validate [control]="row.controls?.userName" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                      </app-validate>-->
+<!--                    </ng-container>-->
+<!--                    <ng-template #userNameCanEdit>-->
+<!--                      <input [formControl]="row.controls['userName']" class="form-control"/>-->
+<!--                    </ng-template>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="width: 250px;">-->
+<!--                    <input [formControl]="row.controls['fullName']" class="form-control"/>-->
+<!--                    <app-validate [control]="row.controls?.fullName" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="width: 300px;" >-->
+<!--                    <app-lpb-select2 [items]="row.controls?.listJobCodes.value"-->
+<!--                                     [config]="{displayCodeAndName: true}"-->
+<!--                                     labelName="name" bindValue="code"-->
+<!--                                     [formControl]="row.controls['jobCode']"-->
+<!--                                     [className]="formHelpers.isValidClass(row.controls?.jobCode)"-->
+<!--                                     placeholder="Chá»n"></app-lpb-select2>-->
+<!--                    &lt;!&ndash;                    <ng-select class="form-control" id="role" [formControl]="row.controls['jobCode']" placeholder="Chá»n"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            [className]="formHelpers.isValidClass(row.controls?.jobCode)">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <ng-option *ngFor="let item of row.controls?.listJobCodes.value as i" [value]="item" >{{ item }}</ng-option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </ng-select>&ndash;&gt;-->
+<!--                    <app-validate [control]="row.controls?.jobCode" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                    &lt;!&ndash;                    <input [formControl]="row.controls['jobCode']" class="form-control" matTooltipPosition="above"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           matTooltip="{{row.controls['jobCode'].value}}" />&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <app-validate [control]="row.controls?.jobCode" message="Báº¯t buá»™c nháº­p" error="required">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </app-validate>&ndash;&gt;-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="width: 300px;">-->
+<!--                    <input [formControl]="row.controls['department']" class="form-control"/>-->
+<!--                    <app-validate [control]="row.controls?.department" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="width: 300px;">-->
+<!--                    <input [formControl]="row.controls['phong']" class="form-control"/>-->
+<!--                    <app-validate [control]="row.controls?.phong" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="width: 300px;">-->
+<!--                    <input [formControl]="row.controls['boPhan']" class="form-control"/>-->
+<!--                    <app-validate [control]="row.controls?.boPhan" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="width: 300px;">-->
+<!--                    <app-lpb-select2 [items]="requestTypes"-->
+<!--                                     labelName="name" bindValue="code"-->
+<!--                                     [formControl]="row.controls['requestType']"-->
+<!--                                     [className]="formHelpers.isValidClass(row.controls?.requestType)"-->
+<!--                                     placeholder="Chá»n"></app-lpb-select2>-->
+<!--                    <app-validate [control]="row.controls?.requestType" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white">-->
+<!--                    <app-lpb-datepicker-new [formControl]="row.controls['effectiveDate']"-->
+<!--                                            [className]="formHelpers.isValidClass(row.controls?.effectiveDate)" >-->
+<!--                    </app-lpb-datepicker-new>-->
+<!--                    <app-validate [control]="row.controls?.effectiveDate" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                    <app-validate [control]="row.controls?.effectiveDate" message="KhĂ´ng nhá» hÆ¡n hiá»‡n táº¡i" error="minDateError">-->
+<!--                    </app-validate>-->
+<!--                    <app-validate [control]="row.controls?.effectiveDate" message="Sai Ä‘á»‹nh dáº¡ng ngĂ y" error="notDMYDate">-->
+<!--                    </app-validate>-->
+<!--                    <app-validate [control]="row.controls?.effectiveDate" message="NgĂ y khĂ´ng tá»“n táº¡i" error="dateNotExist">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" style="order: 1;">-->
+<!--                    <input formControlName="note" maxlength="1000" class="form-control"/>-->
+<!--                  </td>-->
+<!--                  <td class="bg-white" *ngFor="let data of processContentConfigFiltered">-->
+<!--                    <div [ngSwitch]="data.type">-->
+<!--                      <div *ngSwitchCase="'Date'">-->
+<!--                        <app-lpb-datepicker-new [formControl]="row.controls[data.title]"-->
+<!--                                                [className]="formHelpers.isValidClass(row.controls[data.title])" >-->
+<!--                        </app-lpb-datepicker-new>-->
+<!--                      </div>-->
+<!--                      <div *ngSwitchCase="'Number'">-->
+<!--                        <input [formControl]="row.controls[data.title]" JustNumberOnly class="form-control"/>-->
+<!--                      </div>-->
+<!--                      <div *ngSwitchDefault>-->
+<!--                        <input [formControl]="row.controls[data.title]" class="form-control"/>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <app-validate [control]="row.controls[data.title]" message="Báº¯t buá»™c nháº­p" error="required">-->
+<!--                    </app-validate>-->
+<!--                    <app-validate [control]="row.controls[data.title]" message="Sai Ä‘á»‹nh dáº¡ng ngĂ y" error="notDMYDate">-->
+<!--                    </app-validate>-->
+<!--                    <app-validate [control]="row.controls[data.title]" message="NgĂ y khĂ´ng tá»“n táº¡i" error="dateNotExist">-->
+<!--                    </app-validate>-->
+<!--                  </td>-->
+<!--                  <td *ngIf="canEdit" class="bg-white sticky-right" style="order: 2; min-width: 75px; max-width: 75px; width: 100%;">-->
+<!--                    <div (click)="deleteRow(i)" style="font-size: 30px;"-->
+<!--                         class="btn p-1 button-icon justify-content-center d-flex" matTooltipPosition="above" role="button" matTooltip="XĂ³a">-->
+<!--                      <i role="button" class="fa d-flex align-items-center fa-trash text-danger"></i>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                </ng-container>-->
+<!--              </tr>-->
+<!--              </tbody>-->
+<!--            </table>-->
+<!--          </div>-->
+<!--          <app-lpb-pagination class="table-page position-sticky" [pagination]="pagination" (evtChangePageSize)="changePageSize($event)"-->
+<!--                              (evtSetPage)="setPage($event)">-->
+<!--          </app-lpb-pagination>-->
+<!--          <div *ngIf="canEdit" class="position-sticky" style="left: 0; bottom: 14px">-->
+<!--            <div *ngIf="processContent.length <= 49; else maxContent" class="btn lpb-btn-primary nowrap" (click)="addRow()">-->
+<!--              ThĂªm dĂ²ng-->
+<!--            </div>-->
+<!--            <ng-template #maxContent>-->
+<!--              <div class="textLabel">-->
+<!--                Sá»‘ lÆ°á»£ng dĂ²ng Ä‘Æ°á»£c thĂªm tá»‘i Ä‘a lĂ  50.-->
+<!--              </div>-->
+<!--            </ng-template>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

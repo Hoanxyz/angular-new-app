@@ -1,0 +1,261 @@
+$--primary-color: #6E361A;
+
+:host::ng-deep {
+  .mat-tooltip {
+    border: 1px solid #844112 !important;
+    background-color: #FFFFFF;
+    color: #844112 !important;
+  }
+
+  .request-content {
+    .ng-dropdown-panel-items {
+      max-height: 105px !important;
+    }
+
+    .ng-dropdown-panel.ng-select-top {
+      top: 100%;
+    }
+  }
+
+  .app-lpb-select2.ng-touched.ng-invalid .ng-select-container,
+  .is-invalid .ng-select-container,
+  input.ng-invalid.ng-touched,
+  textarea.ng-invalid.ng-touched,
+  input.ng-invalid.ng-dirty {
+    border-color: #dc3545;
+  }
+}
+
+.table.bg-bd-none {
+  thead tr th,
+  tbody tr td {
+    background: none !important;
+    border: none !important;
+  }
+}
+
+.buttonCheckbox {
+  width: max-content;
+  height: max-content;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+input[type=checkbox]{
+  accent-color: $--primary-color !important;
+  background-color: $--primary-color !important;
+}
+
+.primary-border {
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 4px;
+
+  &.is-invalid {
+    border-color: #dc3545;
+  }
+}
+
+:host ::ng-deep {
+  .mat-badge-content {
+    font-family: 'Material Icons';
+  }
+
+  mat-tab-group {
+    .mat-tab-label-content {
+      color: $--primary-color;
+      font-size: 1rem;
+    }
+    .mat-ink-bar {
+      background-color: #f47326 !important;
+    }
+  }
+}
+
+::ng-deep{
+  .mat-tooltip{
+    border: 1px solid #844112 !important;
+    background-color: #FFFFFF;
+    color: #844112 !important;
+    max-width: 450px !important;
+  }
+
+}
+
+.st-table{
+  max-width: 550px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.round-div {
+  width: 24px;
+  line-height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: $--primary-color;
+  color: #fff;
+}
+
+.red-color {
+  background-color: #dc3545 !important;
+}
+
+table th {
+  text-align: center !important;
+}
+
+table td {
+  text-align: center;
+}
+.text-a{
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14.52px;
+  text-align: left;
+  color: $--primary-color;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.disabled-row {
+  background-color: #e9ecef !important;
+}
+
+.lpb-btn-white{
+  background: white;
+  color: $--primary-color;
+  border: 1px solid $--primary-color;
+}
+
+.beauty-scroll {
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: $--primary-color;
+  }
+}
+
+.request-content {
+  &.view-mode {
+    .rq-table {
+      padding-bottom: 0;
+    }
+
+    .table-page {
+      bottom: 0;
+    }
+  }
+
+  .rq-table {
+    padding-bottom: 10px;
+  }
+
+  .table-page {
+    left: 0;
+    bottom: 50px
+  }
+
+  overflow-x: auto;
+  th {
+    word-break: break-word;
+  }
+
+  table {
+    border-collapse: collapse;
+    border: 0;
+    width: 100%;
+
+    thead {
+      tr {
+        th {
+          border-right: 1px solid #dee2e6;
+
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+    }
+  }
+
+  tr {
+    display: flex;
+    min-height: 45px;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    flex-grow: 1;
+    width: 250px;
+    &:last-child {
+      border-left: 1px solid #dee2e6 !important;
+    }
+  }
+
+  th {
+    text-align: center;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  td {
+    border-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      width: 100%;
+    }
+  }
+
+  th:not(:first-child) {
+    border-left: 0;
+  }
+
+  td:not(:first-child) {
+    border-left: 0;
+  }
+
+  .sticky-left {
+    position: sticky;
+    left: 0;
+  }
+
+  .sticky-right {
+    position: sticky;
+    right: 0;
+  }
+
+  .sticky-header {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
+}
+
+.text-red {
+  color: red;
+}
+
+.history-activities {
+  li:last-child {
+    margin: 0 !important;
+  }
+}

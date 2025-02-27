@@ -1,94 +1,94 @@
-<mat-drawer-container class="drawer">
-  <mat-drawer mode="side" #drawer>
-    <div class="tb-sideBar">
-      <div class="row">
-        <div class="col-6">
-          <div class="d-flex justify-content-center mt-3 mb-3 ">
-            áº¨n / hiá»ƒn thá»‹ cá»™t trong báº£ng
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="d-flex justify-content-end mt-3 mb-3 ">
-            <button class="btn lpb-btn-primary mr-2" (click)="drawer.close()">
-              <i class="fa fa-close text-white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+<!--<mat-drawer-container class="drawer">-->
+<!--  <mat-drawer mode="side" #drawer>-->
+<!--    <div class="tb-sideBar">-->
+<!--      <div class="row">-->
+<!--        <div class="col-6">-->
+<!--          <div class="d-flex justify-content-center mt-3 mb-3 ">-->
+<!--            áº¨n / hiá»ƒn thá»‹ cá»™t trong báº£ng-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--          <div class="d-flex justify-content-end mt-3 mb-3 ">-->
+<!--            <button class="btn lpb-btn-primary mr-2" (click)="drawer.close()">-->
+<!--              <i class="fa fa-close text-white"></i>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <hr>
-      <div class="row d-flex justify-content-between pl-3 pr-3">
-        <div class="col-md-6">
-          <mat-checkbox color="warn" [checked]="displayAll" (change)="setAllDisplay($event.checked)"
-                        [indeterminate]="someCompleteDisplay()">Hiá»‡n táº¥t cáº£
-          </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-        </div>
-      </div>
-      <hr>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-6 d-flex flex-column" *ngFor="let item of columns; let i = index">
-            <mat-checkbox color="primary" [checked]="!item.hidden"
-                          (change)="displayChange(item)">{{(i + 1) + '. ' + item.headerName}}</mat-checkbox>
-          </div>
-          <div class="col-sm-6 d-flex flex-column">
-          </div>
-        </div>
-      </div>
-    </div>
-  </mat-drawer>
-  <mat-drawer-content>
-    <div class="content-title">
-      <i class="fa fa-cog mr-2 content-title btn"
-         (click)="drawer.toggle()"></i>
-      DANH SĂCH THĂ”NG TIN
-    </div>
-    <div class="tbl-result">
-      <table class="table table-hover">
-        <caption></caption>
-        <thead>
-        <tr>
-          <th class="text-center">STT</th>
-          <th class="" *ngFor="let column of columns; let i = index;" [hidden]="column.hidden" id="colHeader{{i}}">{{column.headerName}} </th>
-          <th class="text-center">TĂ¡c vá»¥</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let row of listDisbursement; let i = index;">
-          <td class="text-center">{{(((pageIndex - 1) * pageSize) + (i + 1))}}</td>
-          <td class="text-center" *ngFor="let column of columns; let i = index;" [hidden]="column.hidden"
-              style="word-break: break-all">
-            <ng-container [ngSwitch]="column.type">
-              <ng-container *ngSwitchCase=tableDataType.codeToName>
-                {{ getCodeValue(row[column.headerProperty]) }}
-              </ng-container>
-              <ng-container *ngSwitchCase=tableDataType.money>
-                {{ row[column.headerProperty] ? row[column.headerProperty] + ' ' + row['currency'] : '' }}
-              </ng-container>
-              <ng-container *ngSwitchDefault>
-                <span>{{ row[column.headerProperty] }}</span>
-              </ng-container>
-            </ng-container>
-          </td>
-          <td class="text-center" style="min-width: 90px">
-                      <span class="d-inline-block" (click)="handleFile(row, actionFile.DOWNLOAD)">
-                        <i class="fa fa-download mr-2 txtLabel m-0 d-inline-block px-1"></i>
-                      </span>
-            <span class="d-inline-block" (click)="handleFile(row, actionFile.VIEW)">
-                        <i class="fa fa-eye txtLabel m-0 d-inline-block px-1"></i>
-                      </span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="empty-data py-3" *ngIf="listDisbursement.length === 0 && search">
-        {{ searchEmpty ? 'KhĂ´ng cho phĂ©p Ä‘á»ƒ trá»‘ng thĂ´ng tin tĂ¬m kiáº¿m' : 'KhĂ´ng tĂ¬m tháº¥y káº¿t quáº£ tĂ¬m kiáº¿m, vui vĂ²ng thá»­ láº¡i' }}
-      </div>
-    </div>
-    <app-lpb-pagination [pagination]="pagination" (evtChangePageSize)="changePageSize($event)"
-                        (evtSetPage)="setPage($event)">
-    </app-lpb-pagination>
-  </mat-drawer-content>
-</mat-drawer-container>
+<!--      <hr>-->
+<!--      <div class="row d-flex justify-content-between pl-3 pr-3">-->
+<!--        <div class="col-md-6">-->
+<!--          <mat-checkbox color="warn" [checked]="displayAll" (change)="setAllDisplay($event.checked)"-->
+<!--                        [indeterminate]="someCompleteDisplay()">Hiá»‡n táº¥t cáº£-->
+<!--          </mat-checkbox>-->
+<!--        </div>-->
+<!--        <div class="col-md-6">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <hr>-->
+<!--      <div class="container-fluid">-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-6 d-flex flex-column" *ngFor="let item of columns; let i = index">-->
+<!--            <mat-checkbox color="primary" [checked]="!item.hidden"-->
+<!--                          (change)="displayChange(item)">{{(i + 1) + '. ' + item.headerName}}</mat-checkbox>-->
+<!--          </div>-->
+<!--          <div class="col-sm-6 d-flex flex-column">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </mat-drawer>-->
+<!--  <mat-drawer-content>-->
+<!--    <div class="content-title">-->
+<!--      <i class="fa fa-cog mr-2 content-title btn"-->
+<!--         (click)="drawer.toggle()"></i>-->
+<!--      DANH SĂCH THĂ”NG TIN-->
+<!--    </div>-->
+<!--    <div class="tbl-result">-->
+<!--      <table class="table table-hover">-->
+<!--        <caption></caption>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th class="text-center">STT</th>-->
+<!--          <th class="" *ngFor="let column of columns; let i = index;" [hidden]="column.hidden" id="colHeader{{i}}">{{column.headerName}} </th>-->
+<!--          <th class="text-center">TĂ¡c vá»¥</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngFor="let row of listDisbursement; let i = index;">-->
+<!--          <td class="text-center">{{(((pageIndex - 1) * pageSize) + (i + 1))}}</td>-->
+<!--          <td class="text-center" *ngFor="let column of columns; let i = index;" [hidden]="column.hidden"-->
+<!--              style="word-break: break-all">-->
+<!--            <ng-container [ngSwitch]="column.type">-->
+<!--              <ng-container *ngSwitchCase=tableDataType.codeToName>-->
+<!--                {{ getCodeValue(row[column.headerProperty]) }}-->
+<!--              </ng-container>-->
+<!--              <ng-container *ngSwitchCase=tableDataType.money>-->
+<!--                {{ row[column.headerProperty] ? row[column.headerProperty] + ' ' + row['currency'] : '' }}-->
+<!--              </ng-container>-->
+<!--              <ng-container *ngSwitchDefault>-->
+<!--                <span>{{ row[column.headerProperty] }}</span>-->
+<!--              </ng-container>-->
+<!--            </ng-container>-->
+<!--          </td>-->
+<!--          <td class="text-center" style="min-width: 90px">-->
+<!--                      <span class="d-inline-block" (click)="handleFile(row, actionFile.DOWNLOAD)">-->
+<!--                        <i class="fa fa-download mr-2 txtLabel m-0 d-inline-block px-1"></i>-->
+<!--                      </span>-->
+<!--            <span class="d-inline-block" (click)="handleFile(row, actionFile.VIEW)">-->
+<!--                        <i class="fa fa-eye txtLabel m-0 d-inline-block px-1"></i>-->
+<!--                      </span>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--      <div class="empty-data py-3" *ngIf="listDisbursement.length === 0 && search">-->
+<!--        {{ searchEmpty ? 'KhĂ´ng cho phĂ©p Ä‘á»ƒ trá»‘ng thĂ´ng tin tĂ¬m kiáº¿m' : 'KhĂ´ng tĂ¬m tháº¥y káº¿t quáº£ tĂ¬m kiáº¿m, vui vĂ²ng thá»­ láº¡i' }}-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <app-lpb-pagination [pagination]="pagination" (evtChangePageSize)="changePageSize($event)"-->
+<!--                        (evtSetPage)="setPage($event)">-->
+<!--    </app-lpb-pagination>-->
+<!--  </mat-drawer-content>-->
+<!--</mat-drawer-container>-->
