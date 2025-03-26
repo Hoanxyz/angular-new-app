@@ -1,2 +1,2 @@
 <input [placeholder]="placeholder" class="form-control" type="text" [disabled]="isDisabled" (blur)="onTouched(); handleBlur()"
-       (input)="changeData($event.target.value)" [maxLength]="maxLength" #moneyInput>
+       (input)="changeData($event)" [maxLength]="maxLength" #moneyInput>

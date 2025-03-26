@@ -74,7 +74,7 @@ export class LpbFileComponent implements ControlValueAccessor, OnChanges, Valida
   @Output() clickDelete = new EventEmitter<any>();
   @Output() uploaded = new EventEmitter<any>();
   @Output() nameClicked = new EventEmitter<any>();
-  uploadFile = this.fb.control('');
+  uploadFile = this.fb.control<File | null>(null);
   touched = false;
   disabled = false;
 
@@ -156,7 +156,10 @@ export class LpbFileComponent implements ControlValueAccessor, OnChanges, Valida
     this.nameClicked.emit(this.uploadFile.value);
   }
 
-  bytesToKBytes(bytes: number): number {
+  bytesToKBytes(bytes: number | undefined): number {
+    if (!bytes) {
+      return 0;
+    }
     return Math.ceil(bytes / 1024);
   }
 

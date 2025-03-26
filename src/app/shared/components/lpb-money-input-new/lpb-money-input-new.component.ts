@@ -82,7 +82,14 @@ export class LpbMoneyInputNewComponent implements OnInit, ControlValueAccessor, 
     }
   }
 
-  changeData(value: string): void {
+  changeData(event: Event | string): void {
+    let value;
+    if (typeof event === 'string') {
+      value = event;
+    } else {
+      const inputElement = event.target as HTMLInputElement;
+      value = inputElement.value;
+    }
     if (!value) {
       this.moneyInput.nativeElement.value = '';
       this.onChange('');

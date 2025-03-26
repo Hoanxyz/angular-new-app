@@ -7,9 +7,9 @@
         </div>
         <div class="name-size-wrapper">
           <ng-container *ngIf="isUpload; else oldFile">
-            <div class="file-label mr-2" title="{{uploadFile.value.name}}"
-                 *ngIf="uploadFile.value.name;else uploadInputLabelElse">
-              {{ uploadFile.value.name }}
+            <div class="file-label mr-2" title="{{uploadFile.value?.name}}"
+                 *ngIf="uploadFile.value?.name;else uploadInputLabelElse">
+              {{ uploadFile.value?.name }}
             </div>
             <ng-template #uploadInputLabelElse>
               <div class="file-label mr-2" title="{{fileSizeMB !== 0 ? 'File ' + fileTypesAccept.join(', ') +' khĂ´ng quĂ¡ ' + fileSizeMB + 'MB' : ''}}">
@@ -18,13 +18,14 @@
             </ng-template>
           </ng-container>
           <ng-template #oldFile>
-            <div class="file-label mr-2 pointer-event pointer-class font-weight-bold" title="{{uploadFile.value.name}}"
+            <div class="file-label mr-2 pointer-event pointer-class font-weight-bold" title="{{uploadFile.value?.name}}"
                  (click)="handleNameClicked()" matTooltipPosition="above" role="button" matTooltip="{{nameClickText}}">
-              {{ uploadFile.value.name }}
+              {{ uploadFile.value?.name }}
             </div>
           </ng-template>
-          <div *ngIf="uploadFile.value.size && showSize" class="mt-1">
-            {{ bytesToKBytes(uploadFile.value.size) }} kb
+          <div *ngIf="uploadFile.value?.size && showSize" class="mt-1">
+
+            {{ bytesToKBytes(uploadFile.value?.size) }} kb
           </div>
         </div>
       </div>
