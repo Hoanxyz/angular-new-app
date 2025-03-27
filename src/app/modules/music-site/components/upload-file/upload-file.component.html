@@ -1,9 +1,9 @@
-<div class="d-flex justify-content-between align-items-center" [ngClass]="isUpload ? 'is-upload' : ''">
-  <div class="d-flex px-2 {{ styleClasses }} py-1 w-100 d-flex align-items-center position-relative"
+<div class="flex justify-between items-center" [ngClass]="isUpload ? 'is-upload' : ''">
+  <div class="flex px-2 {{ styleClasses }} py-1 w-100 flex items-center relative"
        [ngClass]="uploadFile.invalid && uploadFile.touched ? 'is-invalid' : ''" style="min-height: 58px;">
-    <div class="w-100 d-flex justify-content-between">
-      <div class="d-flex align-items-center icon-name-size-wrapper">
-        <div class="p-1 {{ styleClasses }} mr-3 d-flex align-items-center justify-content-center">
+    <div class="w-100 flex justify-between">
+      <div class="flex items-center icon-name-size-wrapper">
+        <div class="p-1 {{ styleClasses }} mr-3 flex items-center justify-center">
           <mat-icon class="file-icon">{{ fileIcon }}</mat-icon>
         </div>
         <div class="name-size-wrapper">
@@ -29,16 +29,16 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isUpload" class="position-relative" style="margin-right: 40px">
-        <input type="file" class="position-relative pointer-event pointer-class h-100 input-file" id="inputGroupFile"
+      <div *ngIf="isUpload" class="relative" style="margin-right: 40px">
+        <input type="file" class="relative pointer-event pointer-class h-100 input-file" id="inputGroupFile"
                [accept]="fileTypesAccept.join(', ')" [multiple]="false" #fileInput
                aria-describedby="inputExcelFile" (change)="fileUploaded($event, fileInput)" />
-        <mat-icon class="position-absolute pointer-event pointer-class upload-icon">cloud_upload</mat-icon>
+        <mat-icon class="absolute pointer-event pointer-class upload-icon">cloud_upload</mat-icon>
       </div>
     </div>
     <div *ngIf="showDelete" (click)="handleDelete()" class="btn p-1 button-icon flex-column file-delete"
          matTooltipPosition="above" role="button" matTooltip="Xóa">
-      <i role="button" class="fa d-flex align-items-center fa-trash text-danger"></i>
+      <i role="button" class="fa flex items-center fa-trash text-danger"></i>
     </div>
   </div>
 </div>

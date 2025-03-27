@@ -6,11 +6,15 @@ import {TestModule} from "./modules/test/test.module";
 import {TourOfHeroesModule} from "./modules/tour-of-heroes/tour-of-heroes.module";
 import {RouterSampleModule} from "./modules/router-sample/router-sample.module";
 import {PageNotFoundComponent} from "./modules/router-sample/components/page-not-found/page-not-found.component";
+import {PostModule} from "./modules/posts/post.module";
 
 const routes: Routes = [
   {
     path: 'new-year',
     loadChildren: () => import('./modules/new-year/new-year.module').then((m) => NewYearModule)
+  },{
+    path: 'my-post',
+    loadChildren: () => import('./modules/posts/post.module').then((m) => PostModule)
   },
   {
     path: 'music',

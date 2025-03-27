@@ -16,6 +16,6 @@ export class BetterLoggerService extends LoggerService {
   override log(msg: string) {
     const name = this.userService.user.name;
     super.log(`Massage to ${name}: ${msg}`);
-    console.log(super.logs);
+    console.log(super["logs"]);
   }
 }

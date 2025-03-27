@@ -11,8 +11,8 @@ import { ValidateComponent } from './components/validate/validate.component';
 // import { LpbPaginationComponent } from './components/lpb-pagination/lpb-pagination.component';
 import { LpbPaginatorComponent } from './components/lpb-paginator/lpb-paginator.component';
 import {MatIconModule} from "@angular/material/icon";
-import {NgOptionComponent, NgSelectComponent} from "@ng-select/ng-select";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {NgSelectModule} from "@ng-select/ng-select";
 // import { LpbDatatableComponent } from './components/lpb-datatable/lpb-datatable.component';
 // import { PrintDocsTableComponent } from './components/print-docs-table/print-docs-table.component';
 // import { RequestContentComponent } from './components/request-content/request-content.component';
@@ -41,10 +41,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     CommonModule,
     ReactiveFormsModule,
     MatIconModule,
-    NgSelectComponent,
     FormsModule,
-    NgOptionComponent,
-    MatTooltipModule
+    MatTooltipModule,
+    NgSelectModule
   ]
 })
 export class SharedModule { }

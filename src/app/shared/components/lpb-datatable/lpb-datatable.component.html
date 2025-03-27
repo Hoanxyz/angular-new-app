@@ -3,12 +3,12 @@
 <!--    <div class="tb-sideBar">-->
 <!--      <div class="row">-->
 <!--        <div class="col-6">-->
-<!--          <div class="d-flex justify-content-center mt-3 mb-3 ">-->
+<!--          <div class="flex justify-center mt-3 mb-3 ">-->
 <!--            áº¨n / hiá»ƒn thá»‹ cá»™t trong báº£ng-->
 <!--          </div>-->
 <!--        </div>-->
 <!--        <div class="col-6">-->
-<!--          <div class="d-flex justify-content-end mt-3 mb-3 ">-->
+<!--          <div class="flex justify-content-end mt-3 mb-3 ">-->
 <!--            <button class="btn lpb-btn-primary mr-2" (click)="drawer.close()">-->
 <!--              <i class="fa fa-close text-white"></i>-->
 <!--            </button>-->
@@ -17,7 +17,7 @@
 <!--      </div>-->
 
 <!--      <hr>-->
-<!--      <div class="row d-flex justify-content-between pl-3 pr-3">-->
+<!--      <div class="row flex justify-between pl-3 pr-3">-->
 <!--        <div class="col-md-6">-->
 <!--          <mat-checkbox color="warn" [checked]="displayAll" (change)="setAllDisplay($event.checked)"-->
 <!--                        [indeterminate]="someCompleteDisplay()">{{displayAll ? 'Hiá»‡n' : 'áº¨n'}} táº¥t cáº£-->
@@ -31,11 +31,11 @@
 <!--      <hr>-->
 <!--      <div class="container-fluid">-->
 <!--        <div class="row">-->
-<!--          <div class="col-sm-6 d-flex flex-column" *ngFor="let item of columns; let i = index">-->
+<!--          <div class="col-sm-6 flex flex-column" *ngFor="let item of columns; let i = index">-->
 <!--            <mat-checkbox color="primary" [checked]="!item.hidden"-->
 <!--                          (change)="displayChange(item)">{{(i + 1) + '. ' + item.headerName}}</mat-checkbox>-->
 <!--          </div>-->
-<!--          <div class="col-sm-6 d-flex flex-column">-->
+<!--          <div class="col-sm-6 flex flex-column">-->
 <!--            &lt;!&ndash;            <mat-checkbox color="primary" *ngFor="let item of tickTB.slice(15)" [(ngModel)]="item.ticked"&ndash;&gt;-->
 <!--            &lt;!&ndash;                          (ngModelChange)="updateAllComplete()">{{item.name}}</mat-checkbox>&ndash;&gt;-->
 <!--          </div>-->
@@ -45,10 +45,10 @@
 <!--  </mat-drawer>-->
 <!--  <mat-drawer-content>-->
 <!--    <div-->
-<!--      class="content-title w-100 text-uppercase d-flex justify-content-between"-->
+<!--      class="content-title w-100 text-uppercase flex justify-between"-->
 <!--      *ngIf="tableName"-->
 <!--    >-->
-<!--      <div class="d-flex align-items-center">-->
+<!--      <div class="flex items-center">-->
 <!--        <span>-->
 <!--          <i class="fa fa-cog mr-2 content-title btn" [hidden]="config.hiddenSetting === true"-->
 <!--             (click)="drawer.toggle()"></i>-->
@@ -83,7 +83,7 @@
 <!--        </button>-->
 <!--      </div>-->
 <!--      <div class="w-div-table">-->
-<!--        &lt;!&ndash;        <div class="d-flex justify-content-between" [hidden]="config.hiddenSetting == true">&ndash;&gt;-->
+<!--        &lt;!&ndash;        <div class="flex justify-between" [hidden]="config.hiddenSetting == true">&ndash;&gt;-->
 <!--        &lt;!&ndash;          <button mat-button (click)="drawer.toggle()">CĂ i Ä‘áº·t hiá»ƒn thá»‹</button>&ndash;&gt;-->
 <!--        &lt;!&ndash;        </div>&ndash;&gt;-->
 <!--        <div class="div-table-flex" #lpbDataTable style="transition: min-height .2s; overflow-y: hidden;">-->
@@ -92,7 +92,7 @@
 <!--          <table class="table-hover" style="min-height: 100px;">-->
 <!--            <thead>-->
 <!--            <tr>-->
-<!--              <th *ngIf="config.hasSelection" class="sticky-left justify-content-center"-->
+<!--              <th *ngIf="config.hasSelection" class="sticky-left justify-center"-->
 <!--                  style="max-width: 50px; width: 100%">-->
 <!--                <mat-checkbox color="primary" *ngIf="!outputHandleClick"-->
 <!--                              [disabled]="disableCkAll || config.disableCheck"-->
@@ -110,7 +110,7 @@
 <!--                              [indeterminate]="isIndeterminate()">-->
 <!--                </mat-checkbox>-->
 <!--              </th>-->
-<!--              <th *ngIf="config.hasNoIndex" class="justify-content-center" style="max-width: 50px; width: 100%">STT</th>-->
+<!--              <th *ngIf="config.hasNoIndex" class="justify-center" style="max-width: 50px; width: 100%">STT</th>-->
 <!--              <th class="{{config.hasSort ? 'sortable' : ''}}" *ngFor="let column of columns; let i = index;" [hidden]="column.hidden" id="colHeader{{i}}"-->
 <!--                  [ngClass]=[column.className] (click)="sort(column, i)">{{column.headerName}} </th>-->
 <!--              <th class="w-150-px sticky-right" [hidden]="config.hiddenActionColumn">Thao tĂ¡c</th>-->
@@ -120,7 +120,7 @@
 <!--            <tr *ngFor="let row of dataSource; let i = index;"-->
 <!--                class="{{config.rowBgColor ? config.rowBgColor(row) : ''}}"-->
 <!--                [class.d-none]="(i<startRowOfPage-1 || i>endRowOfPage-1) && !apiServiceURL && config.hasPaging === true">-->
-<!--              <td class="sticky-col justify-content-center sticky-left bg-white" *ngIf="config.hasSelection"-->
+<!--              <td class="sticky-col justify-center sticky-left bg-white" *ngIf="config.hasSelection"-->
 <!--                  style="max-width: 50px; width: 100%">-->
 <!--                <mat-checkbox *ngIf="!config.paymentConfig && !outputHandleClick" color="primary"-->
 <!--                              (click)="$event.stopPropagation();"-->
@@ -142,7 +142,7 @@
 <!--                </mat-checkbox>-->
 <!--              </td>-->
 <!--              <td *ngIf="config.hasNoIndex;"-->
-<!--                  class="justify-content-center "-->
+<!--                  class="justify-center "-->
 <!--                  style="max-width: 50px;width: 100%">{{(((pageIndex - 1) * defaultPageSize) + (i + 1))}}</td>-->
 <!--              <ng-container *ngIf="config.hasRowClick;else elseBlock">-->
 <!--                <td *ngFor="let column of columns; let i = index;" (click)="view($event, row)" [hidden]="column.hidden"-->
@@ -178,9 +178,9 @@
 <!--                </td>-->
 <!--              </ng-template>-->
 
-<!--              <td class="w-150-px justify-content-center text-center action-column sticky-right bg-white gap-4"-->
+<!--              <td class="w-150-px justify-center text-center action-column sticky-right bg-white gap-4"-->
 <!--                  [hidden]="config.hiddenActionColumn">-->
-<!--                &lt;!&ndash;            <div class="justify-content-center text-center">&ndash;&gt;-->
+<!--                &lt;!&ndash;            <div class="justify-center text-center">&ndash;&gt;-->
 <!--                <ng-container *ngIf="!config?.buttonOther">-->
 <!--                  <button class="btn p-0" [disabled]="isDisabledUpdate(row)" (click)="edit($event, row)"-->
 <!--                          *ngIf="isDisplayEdit">-->
@@ -266,7 +266,7 @@
 <!--            </tr>-->
 <!--            <tr *ngIf="dataSource?.length <= 0 && !isLoading">-->
 <!--              <td [attr.colspan]="columns.length && columns.length + 2"-->
-<!--                  class="py-4 text justify-content-center text-center">-->
+<!--                  class="py-4 text justify-center text-center">-->
 <!--                KhĂ´ng tĂ¬m tháº¥y dá»¯ liá»‡u-->
 <!--              </td>-->
 <!--            </tr>-->
