@@ -99,12 +99,14 @@ export class UploadFileComponent implements ControlValueAccessor, OnChanges, Val
     }
   }
 
-  registerOnChange(onChange: any): void
+  registerOnChange(onChange: any): void {
+    const sub = this.uploadFile.valueChanges.subscribe(onChange); this.onChangeSubs.push(sub);
+  }
 
-    { const sub = this.uploadFile.valueChanges.subscribe(onChange); this.onChangeSubs.push(sub); }
-  registerOnTouched(onTouched: any): void
+  registerOnTouched(onTouched: any): void {
+    this.onTouched = onTouched;
+  }
 
-    { this.onTouched = onTouched; }
   writeValue(value: any): void {
     if (value)
 

@@ -79,29 +79,28 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
     this.formUpload.markAllAsTouched();
     if (this.formUpload.valid) {
       const formData = new FormData();
-      if (this.formUpload.get('file')?.value) {
-        // @ts-ignore
-        formData.append('file', this.formUpload.get('file')?.value);
-
-        this.musicService.uploadSong(formData).subscribe(
-          (response) => {
+      const file = this.formUpload.get('file')?.value as File | null;
+      if (file) {
+        formData.append('file', file);
+        this.musicService.uploadSong(formData).subscribe({
+          next: (value) => {
             this.songTable.searchSong();
-            this.uploadSong.nativeElement.value = "";
-            this.selectedFile = null;
+            // this.uploadSong.nativeElement.value = "";
+            // this.selectedFile = null;
             this.dialog.open(AlertDialogComponent, {
               data: {
                 content: 'Upload bài hát thành công'
               }
             });
           },
-          (error) => {
+          error: (error) => {
             this.dialog.open(AlertDialogComponent, {
               data: {
                 content: error
               }
             });
           }
-        );
+        });
       }
     }
   }
