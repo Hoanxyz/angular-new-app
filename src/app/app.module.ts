@@ -7,7 +7,7 @@ import {NewYearModule} from "./modules/new-year/new-year.module";
 import {NewYearRoutingModule} from "./modules/new-year/new-year-routing.module";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ApiService} from "./shared/services/services.service";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
@@ -23,6 +23,13 @@ import {InMemoryDataService} from "./modules/tour-of-heroes/services/in-memory-d
 import { HeroesModule } from './modules/router-sample/heroes/heroes.module';
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {NgSelectComponent} from "@ng-select/ng-select";
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -48,6 +55,14 @@ import {CommonModule} from "@angular/common";
     MatOptionModule,
     MatSelectModule,
     MatInputModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'en-US',
+    }),
 
 // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
 // and returns simulated server responses.
@@ -55,7 +70,8 @@ import {CommonModule} from "@angular/common";
 //     HttpClientInMemoryWebApiModule.forRoot(
 //       InMemoryDataService, { dataEncapsulation: false }
 //     ),
-  HeroesModule
+    HeroesModule,
+    NgSelectComponent
   ],
   providers: [
     ApiService,
