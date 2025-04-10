@@ -22,6 +22,10 @@ import {HeroService} from "./heroes/shared/hero.service";
 import { DynamicFormComponent } from './form/dynamic/dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './form/dynamic/dynamic-form-question/dynamic-form-question.component';
 import { ConfigComponent } from './http/config/config/config.component';
+import {CustomSelectComponent} from "../../shared/components/custom-select/custom-select.component";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {CustomNzSelectComponent} from "../../shared/components/custom-nz-select/custom-nz-select.component";
+import {NzDividerModule} from "ng-zorro-antd/divider";
 
 @NgModule({
     declarations: [
@@ -37,15 +41,19 @@ import { ConfigComponent } from './http/config/config/config.component';
         DynamicFormQuestionComponent,
         ConfigComponent,
     ],
-    imports: [
-        CommonModule,
-        TestRoutingModule,
-        FormsModule,
-        SharedModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatInputModule
-    ],
+  imports: [
+    CommonModule,
+    TestRoutingModule,
+    FormsModule,
+    SharedModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatInputModule,
+    CustomSelectComponent,
+    NzSelectModule,
+    CustomNzSelectComponent,
+    NzDividerModule,
+  ],
     exports: [
         HeroesComponent
     ],

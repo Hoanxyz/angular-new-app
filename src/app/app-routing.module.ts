@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'music',
+    redirectTo: 'test',
     pathMatch: 'full'
   },
   {path: '**', component: PageNotFoundComponent}

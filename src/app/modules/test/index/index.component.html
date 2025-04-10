@@ -1,9 +1,23 @@
-<div>
-  <app-ad-banner [ads]="ads" *appUnless="true"></app-ad-banner>
-  <app-heroes></app-heroes>
-  <div>
-    <h2>Job Application for Heroes</h2>
-    <app-dynamic-form [questions]="questions$ | async"></app-dynamic-form>
-    <app-config></app-config>
-  </div>
+
+
+<div>-----------------------</div>
+<app-custom-select
+  [nzMaxTagCount]="3"
+  [nzMaxTagPlaceholder]="tagPlaceHolder"
+  [nzMode]="'multiple'"
+  [nzPlaceHolder]="'Please select'"
+  [(ngModel)]="listOfSelectedValue"
+>
+  <nz-option *ngFor="let item of items" [nzLabel]="item" [nzValue]="item"></nz-option>
+</app-custom-select>
+<ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+<div>-----------------------</div>
+<div>-----------------------</div>
+<div [formGroup]="form">
+<!--  <app-lpb-file formControlName="file"></app-lpb-file>-->
+<!--  <app-custom-nz-select formControlName="select" [nzMode]="'multiple'" [nzMaxTagPlaceholder]="tagPlaceHolder" [items]="items" [nzLabel]="'label'" [nzValue]="'value'"></app-custom-nz-select>-->
 </div>
+
+
+<ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+

@@ -1,24 +1,31 @@
-<div class="container-fluid py-3">
-  <h1>Angular Internationalization (i18n)</h1>
+<!--<div class="container-fluid py-3">-->
+<!--  <h1>Angular Internationalization (i18n)</h1>-->
 
-  <div class="btn-group btn-group-sm py-5">
-    <button type="button" class="btn btn-sm btn-outline-secondary"
-            (click)="changeLanguage('de-DE')"
-            [class.active]="translateService.currentLang === 'de-DE'">
-      Deutschland</button>
-    <button type="button" class="btn btn-sm btn-outline-secondary"
-            (click)="changeLanguage('en-US')"
-            [class.active]="!translateService.currentLang ||
-                            translateService.currentLang === 'en-US'">English</button>
-  </div>
+<!--  <div class="btn-group btn-group-sm py-5">-->
+<!--    <button type="button" class="btn btn-sm btn-outline-secondary"-->
+<!--            (click)="changeLanguage('de-DE')"-->
+<!--            [class.active]="translateService.currentLang === 'de-DE'">-->
+<!--      Deutschland</button>-->
+<!--    <button type="button" class="btn btn-sm btn-outline-secondary"-->
+<!--            (click)="changeLanguage('en-US')"-->
+<!--            [class.active]="!translateService.currentLang ||-->
+<!--                            translateService.currentLang === 'en-US'">English</button>-->
+<!--  </div>-->
 
-  <h3>{{ "hello" | translate: { name: title } }}</h3>
-</div>
-<ng-select
-  [items]="items"
-  bindLabel="name"
-  bindValue="id"
-  [virtualScroll]="true"
-  placeholder="Select an item">
-</ng-select>
+<!--  <h3>{{ "hello" | translate: { name: title } }}</h3>-->
+<!--</div>-->
+
+
+<!--<ng-select-->
+<!--  [items]="items"-->
+<!--  bindLabel="name"-->
+<!--  bindValue="id"-->
+<!--  [virtualScroll]="true"-->
+<!--  placeholder="Select an item">-->
+<!--</ng-select>-->
+
+<!--<app-sample-table></app-sample-table>-->
+
+
+
 <router-outlet></router-outlet>

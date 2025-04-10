@@ -1,0 +1,23 @@
+<nz-select
+  [nzDisabled] = nzDisabled
+  [nzLoading] = nzLoading
+  [nzAllowClear] = nzAllowClear
+  [nzPlaceHolder] = nzPlaceHolder
+  [nzShowSearch] = nzShowSearch
+  [nzServerSearch] = nzServerSearch
+  [nzMode]="nzMode"
+  [nzMaxTagCount]="nzMaxTagCount"
+  [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+  [nzDropdownRender]="nzDropdownRender"
+  [nzTokenSeparators]="nzTokenSeparators"
+  [compareWith]="compareWith"
+  [formControl]="value"
+  >
+  <ng-container *ngFor="let opt of options">
+    <nz-option
+      [nzLabel]="opt.nzLabel"
+      [nzValue]="opt.nzValue"
+      [nzDisabled]="opt.nzDisabled">
+    </nz-option>
+  </ng-container>
+</nz-select>

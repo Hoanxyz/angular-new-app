@@ -34,9 +34,10 @@ import {NgSelectModule} from "@ng-select/ng-select";
     // PrintDocsTableComponent,
     // RequestContentComponent
   ],
-  exports: [
-    InputMoneyComponent
-  ],
+    exports: [
+        InputMoneyComponent,
+        LpbFileComponent
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

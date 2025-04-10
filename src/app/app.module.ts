@@ -7,7 +7,7 @@ import {NewYearModule} from "./modules/new-year/new-year.module";
 import {NewYearRoutingModule} from "./modules/new-year/new-year-routing.module";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ApiService} from "./shared/services/services.service";
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
@@ -22,10 +22,18 @@ import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryDataService} from "./modules/tour-of-heroes/services/in-memory-data.service";
 import { HeroesModule } from './modules/router-sample/heroes/heroes.module';
 import {RouterModule} from "@angular/router";
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NgSelectComponent} from "@ng-select/ng-select";
+import {SampleTableComponent} from "./shared/components/sample-table/sample-table.component";
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import en from '@angular/common/locales/en';
+import {CustomSelectComponent} from "./shared/components/custom-select/custom-select.component";
+import {NzSelectModule} from "ng-zorro-antd/select";
+
+registerLocaleData(en);
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,30 +47,31 @@ export function createTranslateLoader(http: HttpClient) {
     DashboardUpdateAccountComponent,
     DashboardUserInfoComponent
   ],
-  imports: [
-    RouterModule,
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    NewYearModule,
-    NewYearRoutingModule,
-    MatDialogModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatInputModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient],
-      },
-      defaultLanguage: 'en-US',
-    }),
+    imports: [
+        RouterModule,
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        NewYearModule,
+        NewYearRoutingModule,
+        MatDialogModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatInputModule,
+        HttpClientJsonpModule,
+        TranslateModule.forRoot({
+              loader: {
+                  provide: TranslateLoader,
+                  useFactory: (createTranslateLoader),
+                  deps: [HttpClient],
+              },
+              defaultLanguage: 'en-US',
+          }),
 
 // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
 // and returns simulated server responses.
@@ -70,12 +79,16 @@ export function createTranslateLoader(http: HttpClient) {
 //     HttpClientInMemoryWebApiModule.forRoot(
 //       InMemoryDataService, { dataEncapsulation: false }
 //     ),
-    HeroesModule,
-    NgSelectComponent
-  ],
+        HeroesModule,
+        NgSelectComponent,
+        SampleTableComponent,
+        CustomSelectComponent,
+        NzSelectModule
+    ],
   providers: [
     ApiService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })

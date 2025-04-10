@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.post<any>(`${listApis.local}/user/register`, formData)
   }
 
+  allUsers(formData: any): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/user/all`, formData)
+  }
+
   login(formData: any): Observable<any> {
     return this.http.post<any>(`${listApis.local}/user/login`, formData)
   }

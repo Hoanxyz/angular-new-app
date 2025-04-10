@@ -1,0 +1,37 @@
+
+  <nz-select #nzSelect
+   [nzDisabled] = nzDisabled
+   [nzLoading] = nzLoading
+   [nzAllowClear] = nzAllowClear
+   [nzPlaceHolder] = nzPlaceHolder
+   [nzShowSearch] = nzShowSearch
+   [nzServerSearch] = nzServerSearch
+   [nzMode]="nzMode"
+   [nzMaxTagCount]="nzMaxTagCount"
+   [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+   [nzDropdownRender]="nzDropdownRender"
+   [nzTokenSeparators]="nzTokenSeparators"
+   [compareWith]="compareWith"
+   (nzOnSearch)="onSearch($event)"
+   [formControl]="value"
+   (change)="changeVal($event)"
+  >
+    <ng-container *ngIf="isOptionGroup">
+      <ng-container *ngFor="let group of optionGroups">
+        <nz-option-group [nzLabel]="group.label">
+          <nz-option
+            *ngFor="let opt of group.options"
+            [nzLabel]="opt.label"
+            [nzValue]="opt.value"
+            [nzDisabled]="opt.disabled"
+          ></nz-option>
+        </nz-option-group>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!isOptionGroup">
+      <nz-option *ngFor="let item of items" [nzLabel]="nzLabel ? item[nzLabel] : item" [nzValue]="nzValue ? item[nzValue] : item"
+                 [nzHide]="isSelected(item)"
+      ></nz-option>
+    </ng-container>
+  </nz-select>
