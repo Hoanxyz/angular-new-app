@@ -13,16 +13,21 @@
 //   ControlValueAccessor,
 //   FormControl,
 //   NG_VALIDATORS,
-//   NG_VALUE_ACCESSOR,
+//   NG_VALUE_ACCESSOR, ReactiveFormsModule,
 //   ValidationErrors,
 //   Validator
 // } from '@angular/forms';
 // import {Observable, of, Subject, Subscription} from 'rxjs';
-// import {NgSelectComponent} from '@ng-select/ng-select';
-// import {HttpService} from '../../../../../shared/services/http.service';
+// import {
+//   NgHeaderTemplateDirective,
+//   NgLabelTemplateDirective,
+//   NgOptionTemplateDirective,
+//   NgSelectComponent
+// } from '@ng-select/ng-select';
 // import {HttpClient} from '@angular/common/http';
 // import {debounceTime, distinctUntilChanged, finalize, map, switchMap} from 'rxjs/operators';
-// import {environment} from '../../../../../../environments/environment';
+// import {listApis} from "../../services/global-variables.constant";
+// import {NgClass, NgTemplateOutlet} from "@angular/common";
 //
 // export class LpbSelect2Config {
 //   isNewApi?: boolean;
@@ -45,8 +50,18 @@
 //
 // @Component({
 //   selector: 'app-new-select-comp',
+//   standalone: true,
 //   templateUrl: './new-select-comp.component.html',
 //   styleUrls: ['./new-select-comp.component.scss'],
+//   imports: [
+//     NgTemplateOutlet,
+//     NgClass,
+//     NgSelectComponent,
+//     ReactiveFormsModule,
+//     NgOptionTemplateDirective,
+//     NgLabelTemplateDirective,
+//     NgHeaderTemplateDirective
+//   ],
 //   providers: [
 //     {
 //       provide: NG_VALUE_ACCESSOR,
@@ -77,11 +92,11 @@
 //   isChanged = false;
 //   isOpen = false;
 //   @Input() apiUrl = '';
-//   @Input() labelName = '';
+//   @Input() labelName: string = '';
 //   @Input() items = [];
-//   @Input() bindValue: string;
-//   @Input() bindTitle: string;
-//   @Input() className: string;
+//   @Input() bindValue: string = 'label';
+//   @Input() bindTitle: string = 'value';
+//   @Input() className?: string;
 //   @Input() config: LpbSelect2Config = {
 //     isNewApi: true,
 //     sort: false,
@@ -97,7 +112,7 @@
 //
 //   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 //   @Output() change: EventEmitter<any> = new EventEmitter<any>();
-//   @ViewChild('ngSelect') ngSelect: NgSelectComponent;
+//   @ViewChild('ngSelect') ngSelect?: NgSelectComponent;
 //   /**
 //    * example (handleData)="({data, setData }) => { const newData = data.filter(...); setData(newData); }"
 //    */
@@ -106,9 +121,9 @@
 //     setData: (data: any) => void; // set new data
 //   }> = new EventEmitter<{ data: any; setData: (data: any) => void }>();
 //
-//   @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
+//   @ContentChild(TemplateRef) templateRef?: TemplateRef<any>;
 //
-//   constructor(private http: HttpService, private httpClient: HttpClient) {
+//   constructor(private http: HttpClient, private httpClient: HttpClient) {
 //   }
 //
 //   ngOnInit(): void {
@@ -132,9 +147,9 @@
 //         } else {
 //           if (!this.handleData.observers?.length) {
 //             if (this.config.displayCodeAndName) {
-//               this.listOptionsBuffer = this.displayCodeAndNameHandle(res.data);
+//               this.listOptionsBuffer = this.displayCodeAndNameHandle(res.content);
 //             } else {
-//               this.listOptionsBuffer = res.data;
+//               this.listOptionsBuffer = res.content;
 //             }
 //
 //             this.total = res.meta?.total;
@@ -160,7 +175,7 @@
 //
 //   }
 //
-//   onOpen(isOpen): void {
+//   onOpen(isOpen: any): void {
 //     this.isOpen = isOpen;
 //     if (!this.listOptionsBuffer || this.listOptionsBuffer.length === 0 || this.currentValue) {
 //       this.fetchData(this.page, true);
@@ -168,7 +183,7 @@
 //
 //   }
 //
-//   fetchMore(term): void {
+//   fetchMore(term: any): void {
 //     this.searchTerm = term;
 //     const len = this.listOptionsBuffer.length;
 //     if (len < this.total) {
@@ -176,6 +191,7 @@
 //       if (!this.apiUrl) {
 //         let more = [];
 //         if (term) {
+//           // @ts-ignore
 //           more = this.items.filter(opt => opt[this.labelName].includes(term)).slice(len, this.bufferSize + len);
 //         } else {
 //           more = this.items.slice(len, this.bufferSize + len);
@@ -199,7 +215,7 @@
 //   }
 //
 //   ngOnChanges(changes: SimpleChanges): void {
-//     if (changes.apiUrl && !changes.apiUrl.firstChange) {
+//     if (changes['apiUrl'] && !changes['apiUrl'].firstChange) {
 //       this.listOptionsBuffer = [];
 //       this.fetchData(this.page);
 //       this.isChanged = true;
@@ -218,11 +234,12 @@
 //     this.destroy$.complete();
 //   }
 //
-//   onChange($event): void {
+//   onChange($event: any): void {
 //     this.change.emit($event);
 //   }
 //
 //   handleClearClick(): void {
+//     // @ts-ignore
 //     this.ngSelect.handleClearClick();
 //   }
 //
@@ -271,6 +288,7 @@
 //     }
 //   }
 //
+//   // @ts-ignore
 //   validate(c: FormControl): ValidationErrors | null {
 //     const value = c.value;
 //     if (!value && c.hasError('required')) {
@@ -292,7 +310,7 @@
 //   }
 //
 //
-//   fetchData(pageIndex, openAction = false): any {
+//   fetchData(pageIndex: any, openAction = false): any {
 //     this.listOptions = [];
 //     if (this.items === null || this.items === undefined) {
 //       this.items = [];
@@ -310,9 +328,9 @@
 //         const params = {
 //           page: pageIndex,
 //           size: '10',
-//           filter
+//           textSearch: ''
 //         };
-//         this.http.get<any>(`${(environment.apiUrl) + this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params})
+//         this.http.get<any>(`${(listApis.local) + this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params})
 //           .pipe(
 //             finalize(() => {
 //               // this is called on both success and error
@@ -322,13 +340,13 @@
 //           .subscribe((res) => {
 //             if (!this.handleData.observers?.length) {
 //               if (this.config.displayCodeAndName) {
-//                 this.listOptions = this.displayCodeAndNameHandle(res.data);
+//                 this.listOptions = this.displayCodeAndNameHandle(res.content);
 //               } else {
-//                 this.listOptions = res.data;
+//                 this.listOptions = res.content;
 //               }
 //
 //
-//               this.total = res.meta.total ?? res.data.length;
+//               this.total = res.totalElements ?? res.content.length;
 //               if (this.config.sort) {
 //                 this.listOptions.sort((obj1, obj2) => {
 //                   if (obj1[this.labelName] > obj2[this.labelName]) {
@@ -351,7 +369,7 @@
 //             } else {
 //               this.handleData.emit({
 //                 data: this.optionAdditional ? this.optionAdditional
-//                   .concat(res.data) : res.data,
+//                   .concat(res.content) : res.content,
 //                 setData: (data: any) => {
 //                   this.listOptions = data;
 //                 },
@@ -368,7 +386,7 @@
 //             this.listOptions = [];
 //           });
 //       } else {
-//         this.httpClient.get<any>(`${environment.apiUrl + this.apiUrl}`, {headers})
+//         this.httpClient.get<any>(`${listApis.local + this.apiUrl}`, {headers})
 //           .pipe(
 //             finalize(() => {
 //               // this is called on both success and error
@@ -431,7 +449,7 @@
 //       if (this.optionAdditional) {
 //         this.total = this.total + this.optionAdditional?.length;
 //         this.listOptions = this.optionAdditional
-//           .concat(this.listOptions.filter(e => e[this.labelName] !== this.optionAdditional.includes(o => o[this.labelName])));
+//           .concat(this.listOptions.filter(e => e[this.labelName] !== this.optionAdditional.includes((o: any) => o[this.labelName])));
 //       }
 //
 //       this.listOptionsBuffer = this.listOptions.slice(0, this.bufferSize);
@@ -455,13 +473,13 @@
 //     return this.listOptions?.length > this.bufferSize;
 //   }
 //
-//   onSearch(term?): void {
+//   onSearch(term?: any): void {
 //     this.searchTerm = term.term;
 //     this.input$.next(term.term);
 //
 //   }
 //
-//   private fakeService(term): Observable<any> {
+//   private fakeService(term: any): Observable<any> {
 //
 //     if (term) {
 //
@@ -484,12 +502,12 @@
 //           };
 //         }
 //
-//         return this.http.get<any>(`${(environment.apiUrl) + this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params});
+//         return this.http.get<any>(`${(listApis.local) + this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params});
 //
 //       } else {
 //         this.isLoading = false;
 //         return of(this.listOptions)
-//           .pipe(map(data => data.filter(x => x[this.labelName]?.toLowerCase().includes(term?.toLowerCase()))));
+//           .pipe(map(data => data.filter((x: any) => x[this.labelName]?.toLowerCase().includes(term?.toLowerCase()))));
 //       }
 //
 //     } else {
@@ -513,7 +531,7 @@
 //             filter: this.searchTerm ? `${this.labelName}|${FilterOperator.LIKE}|${this.searchTerm}` : ''
 //           };
 //         }
-//         return this.http.get<any>(`${(environment.apiUrl) + this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params});
+//         return this.http.get<any>(`${(listApis.local) + this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params});
 //       } else {
 //         this.isLoading = false;
 //         return of(this.listOptions)
@@ -525,7 +543,7 @@
 //   }
 //
 //   displayCodeAndNameHandle(items: any): any {
-//     return items?.map(item => {
+//     return items?.map((item: any) => {
 //       if (!item.displayCodeAndName) {
 //         item[this.labelName] = item[this.bindValue] + ' - ' + item[this.labelName];
 //         item[`displayCodeAndName`] = true;

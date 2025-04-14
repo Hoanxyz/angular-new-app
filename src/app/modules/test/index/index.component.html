@@ -1,22 +1,30 @@
 
+<app-custom-select></app-custom-select>
+<div>-----------------------</div>
+<app-custom-nz-select [apiConfig]="{label: 'name', value: 'id', paginate: true, method: 'POST', showCount: true, searchText: 'textSearch'}" nzShowSearch
+  [apiUrl]="'http://localhost:8080/song/search-songs'"
+>
+</app-custom-nz-select>
+<div>-----------------------</div>
+<nz-select ngModel="lucy" [nzOptions]="listOfOption">
+  <nz-option nzDisabled nzCustomContent>
+    <span nz-icon nzType="loading" class="loading-icon"></span>
+    Loading Data...
+  </nz-option>
+</nz-select>
+<nz-select
+  [(ngModel)]="selectedValue"
+  nzAllowClear
+  nzPlaceHolder="Choose"
+  [nzOptions]="listOfGroupOption"
+></nz-select>
+<div>-----------------------</div>
 
 <div>-----------------------</div>
-<app-custom-select
-  [nzMaxTagCount]="3"
-  [nzMaxTagPlaceholder]="tagPlaceHolder"
-  [nzMode]="'multiple'"
-  [nzPlaceHolder]="'Please select'"
-  [(ngModel)]="listOfSelectedValue"
->
-  <nz-option *ngFor="let item of items" [nzLabel]="item" [nzValue]="item"></nz-option>
-</app-custom-select>
-<ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
-<div>-----------------------</div>
-<div>-----------------------</div>
-<div [formGroup]="form">
-<!--  <app-lpb-file formControlName="file"></app-lpb-file>-->
-<!--  <app-custom-nz-select formControlName="select" [nzMode]="'multiple'" [nzMaxTagPlaceholder]="tagPlaceHolder" [items]="items" [nzLabel]="'label'" [nzValue]="'value'"></app-custom-nz-select>-->
-</div>
+<!--<div [formGroup]="form">-->
+<!--&lt;!&ndash;  <app-lpb-file formControlName="file"></app-lpb-file>&ndash;&gt;-->
+<!--&lt;!&ndash;  <app-custom-nz-select formControlName="select" [nzMode]="'multiple'" [nzMaxTagPlaceholder]="tagPlaceHolder" [items]="items" [nzLabel]="'label'" [nzValue]="'value'"></app-custom-nz-select>&ndash;&gt;-->
+<!--</div>-->
 
 
 <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>

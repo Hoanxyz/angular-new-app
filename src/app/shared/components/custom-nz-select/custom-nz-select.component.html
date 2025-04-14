@@ -1,37 +1,136 @@
-
-  <nz-select #nzSelect
-   [nzDisabled] = nzDisabled
-   [nzLoading] = nzLoading
-   [nzAllowClear] = nzAllowClear
-   [nzPlaceHolder] = nzPlaceHolder
-   [nzShowSearch] = nzShowSearch
-   [nzServerSearch] = nzServerSearch
-   [nzMode]="nzMode"
-   [nzMaxTagCount]="nzMaxTagCount"
-   [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-   [nzDropdownRender]="nzDropdownRender"
-   [nzTokenSeparators]="nzTokenSeparators"
-   [compareWith]="compareWith"
-   (nzOnSearch)="onSearch($event)"
-   [formControl]="value"
-   (change)="changeVal($event)"
+<ng-container *ngIf="nzOptions.length === 0 && !apiUrl">
+  <nz-select
+    [nzDisabled] = nzDisabled
+    [nzLoading] = nzLoading
+    [nzAllowClear] = nzAllowClear
+    [nzPlaceHolder] = nzPlaceHolder
+    [nzShowSearch] = nzShowSearch
+    [nzServerSearch] = nzServerSearch
+    [nzMode]="nzMode"
+    [nzSize]="nzSize"
+    [nzMaxTagCount]="nzMaxTagCount"
+    [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+    [nzDropdownRender]="nzDropdownRender"
+    [nzTokenSeparators]="nzTokenSeparators"
+    [nzCustomTemplate]="nzCustomTemplate"
+    [compareWith]="compareWith"
+    (nzOnSearch)="nzOnSearch.emit($event)"
+    (nzScrollToBottom)="nzScrollToBottom.emit()"
+    [formControl]="value"
+    (change)="changeVal($event)"
+    (scrollend)="scrollToEnd()"
+    (scroll)="scrollToEnd()"
   >
-    <ng-container *ngIf="isOptionGroup">
-      <ng-container *ngFor="let group of optionGroups">
-        <nz-option-group [nzLabel]="group.label">
+    <ng-container *ngIf="!apiUrl">
+      <!-- Group option-->
+      <ng-container *ngIf="optionGroups.length > 0">
+        <ng-container *ngFor="let group of optionGroups; let i = index">
+          <nz-option-group [nzLabel]="group.nzLabel">
+            <ng-container *ngFor="let opt of group.options">
+              <nz-option
+                [nzLabel]="opt.nzLabel"
+                [nzValue]="opt.nzValue"
+                [nzDisabled]="opt.nzDisabled"
+                [nzHide]="opt.nzHide"
+                [nzTitle]="opt.nzTitle"
+                [nzKey]="opt.nzKey"
+                [nzCustomContent]="opt.nzCustomContent"
+              >
+                <ng-template [ngTemplateOutlet]="opt.template"></ng-template>
+              </nz-option>
+            </ng-container>
+          </nz-option-group>
+        </ng-container>
+      </ng-container>
+
+      <!-- Flat options-->
+      <ng-container *ngIf="optionGroups.length === 0">
+        <ng-container *ngFor="let opt of flatOptions;">
           <nz-option
-            *ngFor="let opt of group.options"
-            [nzLabel]="opt.label"
-            [nzValue]="opt.value"
-            [nzDisabled]="opt.disabled"
-          ></nz-option>
-        </nz-option-group>
+            [nzLabel]="opt.nzLabel"
+            [nzValue]="opt.nzValue"
+            [nzDisabled]="opt.nzDisabled"
+            [nzHide]="opt.nzHide"
+            [nzTitle]="opt.nzTitle"
+            [nzKey]="opt.nzKey"
+            [nzCustomContent]="opt.nzCustomContent"
+          >
+            <ng-template [ngTemplateOutlet]="opt.template"></ng-template>
+          </nz-option>
+        </ng-container>
       </ng-container>
     </ng-container>
+  </nz-select>
+</ng-container>
 
-    <ng-container *ngIf="!isOptionGroup">
-      <nz-option *ngFor="let item of items" [nzLabel]="nzLabel ? item[nzLabel] : item" [nzValue]="nzValue ? item[nzValue] : item"
-                 [nzHide]="isSelected(item)"
-      ></nz-option>
+<ng-container *ngIf="nzOptions.length !== 0 && !apiUrl">
+  <nz-select
+    [nzDisabled] = nzDisabled
+    [nzLoading] = nzLoading
+    [nzAllowClear] = nzAllowClear
+    [nzPlaceHolder] = nzPlaceHolder
+    [nzShowSearch] = nzShowSearch
+    [nzServerSearch] = nzServerSearch
+    [nzMode]="nzMode"
+    [nzSize]="nzSize"
+    [nzMaxTagCount]="nzMaxTagCount"
+    [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+    [nzDropdownRender]="nzDropdownRender"
+    [nzTokenSeparators]="nzTokenSeparators"
+    [nzCustomTemplate]="nzCustomTemplate"
+    [nzOptions]="nzOptions"
+    [compareWith]="compareWith"
+    (nzOnSearch)="nzOnSearch.emit($event)"
+    (nzScrollToBottom)="scrollToEnd()"
+    [formControl]="value"
+    (change)="changeVal($event)"
+    (scrollend)="scrollToEnd()"
+    (scroll)="scrollToEnd()"
+
+  >
+  </nz-select>
+</ng-container>
+
+<ng-container *ngIf="apiUrl">
+  <nz-select
+    [nzDisabled] = nzDisabled
+    [nzLoading] = nzLoading
+    [nzAllowClear] = nzAllowClear
+    [nzPlaceHolder] = nzPlaceHolder
+    [nzShowSearch] = nzShowSearch
+    [nzMode]="nzMode"
+    [nzSize]="nzSize"
+    [nzMaxTagCount]="nzMaxTagCount"
+    [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+    [nzDropdownRender]="customDropdown"
+    [nzTokenSeparators]="nzTokenSeparators"
+    [nzCustomTemplate]="nzCustomTemplate"
+    [compareWith]="compareWith"
+    (nzOnSearch)="onSearch($event)"
+    (nzScrollToBottom)="scrollToEnd()"
+    [formControl]="value"
+    (change)="changeVal($event)"
+    (scrollend)="scrollToEnd()"
+    (scroll)="scrollToEnd()"
+  >
+    <ng-container *ngFor="let opt of listOptions;">
+      <nz-option
+        [nzLabel]="opt[this.apiConfig.label]"
+        [nzValue]="opt[this.apiConfig.value]"
+        [nzDisabled]="opt.nzDisabled"
+        [nzHide]="opt.nzHide"
+        [nzTitle]="opt.nzTitle"
+        [nzKey]="opt.nzKey"
+        [nzCustomContent]="opt.nzCustomContent"
+      >
+        <ng-template [ngTemplateOutlet]="opt.template"></ng-template>
+      </nz-option>
     </ng-container>
   </nz-select>
+  <ng-template #customDropdown>
+    <div class="dropdown-footer" *ngIf="this.apiConfig.showCount && listOptions.length != 0">
+      <span>{{'Đã hiển thị ' + listOptions.length + '/' + this.total + ' kết quả'}}</span>
+      <span *ngIf="apiCalling" nz-icon nzType="loading"></span>
+    </div>
+  </ng-template>
+</ng-container>

@@ -1,3 +1,36 @@
-nz-select {
-  width: 200px;
+.custom-select {
+  position: relative;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.selected {
+  padding: 10px;
+  cursor: pointer;
+  background: #f9f9f9;
+}
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+tr:hover {
+  background: #f0f0f0;
 }

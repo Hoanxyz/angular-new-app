@@ -1,23 +1,21 @@
-<nz-select
-  [nzDisabled] = nzDisabled
-  [nzLoading] = nzLoading
-  [nzAllowClear] = nzAllowClear
-  [nzPlaceHolder] = nzPlaceHolder
-  [nzShowSearch] = nzShowSearch
-  [nzServerSearch] = nzServerSearch
-  [nzMode]="nzMode"
-  [nzMaxTagCount]="nzMaxTagCount"
-  [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-  [nzDropdownRender]="nzDropdownRender"
-  [nzTokenSeparators]="nzTokenSeparators"
-  [compareWith]="compareWith"
-  [formControl]="value"
-  >
-  <ng-container *ngFor="let opt of options">
-    <nz-option
-      [nzLabel]="opt.nzLabel"
-      [nzValue]="opt.nzValue"
-      [nzDisabled]="opt.nzDisabled">
-    </nz-option>
-  </ng-container>
-</nz-select>
+<div class="custom-select">
+  <div class="selected" (click)="toggleDropdown()">
+    {{ selectedItem?.name || 'Select an item' }}
+  </div>
+  <div class="options" *ngIf="isDropdownOpen">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items" (click)="selectItem(item)">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

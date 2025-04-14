@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (request.method === 'JSONP') {
-      return next.handle(request);
-    }
+    // if (request.method === 'JSONP') {
+    //   return next.handle(request);
+    // }
     const authToken = localStorage.getItem('authToken');
     if (!(authToken == "undefined" || !authToken)) {
       request = request.clone({

@@ -26,6 +26,9 @@ import {CustomSelectComponent} from "../../shared/components/custom-select/custo
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {CustomNzSelectComponent} from "../../shared/components/custom-nz-select/custom-nz-select.component";
 import {NzDividerModule} from "ng-zorro-antd/divider";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzSpinModule} from "ng-zorro-antd/spin";
+// import {NewSelectCompComponent} from "../../shared/components/new-select-comp/new-select-comp.component";
 
 @NgModule({
     declarations: [
@@ -41,19 +44,22 @@ import {NzDividerModule} from "ng-zorro-antd/divider";
         DynamicFormQuestionComponent,
         ConfigComponent,
     ],
-  imports: [
-    CommonModule,
-    TestRoutingModule,
-    FormsModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatInputModule,
-    CustomSelectComponent,
-    NzSelectModule,
-    CustomNzSelectComponent,
-    NzDividerModule,
-  ],
+    imports: [
+        CommonModule,
+        TestRoutingModule,
+        FormsModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatInputModule,
+        CustomSelectComponent,
+        NzSelectModule,
+        CustomNzSelectComponent,
+        NzDividerModule,
+        NzIconModule,
+        NzSpinModule,
+        // NewSelectCompComponent,
+    ],
     exports: [
         HeroesComponent
     ],

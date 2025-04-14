@@ -15,12 +15,21 @@ import {HttpClient} from "@angular/common/http";
 export class IndexComponent implements OnInit {
   ads!: AdItem[];
   questions$!: Observable<QuestionBase<string>[]> | Observable<any>;
-  items: any;
   form: any;
 
-  listOfSelectedValue = ['a10', 'c12'];
+  items = Array.from({ length: 100000 }, (_, i) => ({ value: i, label: `Item ${i + 1}` }));
 
-
+  selectedValue = 'lucy';
+  listOfOption = [
+    { label: 'Jack', value: 'jack' },
+    { label: 'Lucy', value: 'lucy' },
+    { label: 'disabled', value: 'disabled', disabled: true }
+  ];
+  listOfGroupOption = [
+    { label: 'Jack', value: 'jack', groupLabel: 'Manager' },
+    { label: 'Lucy', value: 'lucy', groupLabel: 'Manager' },
+    { label: 'Tom', value: 'tom', groupLabel: 'Engineer' }
+  ];
 
   constructor(
     private adService: AdService,
@@ -52,6 +61,8 @@ export class IndexComponent implements OnInit {
     //   }
     // });
 
-    this.items = children;
+    // this.items = children;
+
+    /* eslint-disable @typescript-eslint/no-explicit-any */
   }
 }
