@@ -1,15 +1,107 @@
+:host {
+  margin: 20px;
+  display: block;
+
+  nz-select.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+}
+
 nz-select {
   width: 100%;
 }
 
 .dropdown-footer {
   padding: 10px 12px 2px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid #ccc;
   display: flex;
   align-items: center;
-}
-.dropdown-footer span {
-  display: inline-block;
-  margin-right: 10px;
+
+  span {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }
 
+
+.dropdown-header {
+  order: -1;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  margin: 0 12px;
+  background: #ccc;
+
+  .col-name {
+    border-right: 1px solid #ccc;
+    text-align: center;
+    font-weight: 500;
+    padding: 6px 0 4px;
+    text-transform: uppercase;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+
+::ng-deep {
+  .ant-select-item-option-content {
+    overflow: visible;
+  }
+
+  nz-option-container > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cdk-virtual-scroll-viewport {
+    /* Target the scrollbar */
+    &::-webkit-scrollbar {
+      width: 3px; /* Change the width for vertical scrollbar */
+      height: 3px; /* Change the height for horizontal scrollbar */
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #fff; /* Background color of the scrollbar track */
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #ccc; /* Color of the scrollbar handle */
+      border-radius: 6px; /* Rounded corners for the handle */
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555; /* Change color on hover */
+    }
+  }
+}
+
+.row-data  {
+  display: flex;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -6px;
+    left: 0;
+    background: #ccc;
+    content: '';
+  }
+
+  .col-data {
+    border-right: 1px solid #ccc;
+    text-align: center;
+    padding: 0 6px;
+    overflow: hidden;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}

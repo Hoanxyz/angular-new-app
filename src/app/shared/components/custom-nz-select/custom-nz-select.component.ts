@@ -20,7 +20,15 @@ import {
   NzSelectModeType,
   NzSelectModule, NzSelectOptionInterface, NzSelectPlacementType
 } from "ng-zorro-antd/select";
-import {ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  FormsModule, NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  ValidationErrors, Validator
+} from "@angular/forms";
 import {NgForOf, NgIf, NgTemplateOutlet, SlicePipe} from "@angular/common";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
 import {NzSelectSizeType} from "ng-zorro-antd/select/select.component";
@@ -48,6 +56,13 @@ export interface ApiUrlConfig {
   options?: object;
   showCount?: boolean;
   searchText?: string;
+  size?: string;
+}
+
+export interface DataRowTable {
+  label: string;
+  value: any;
+  width?: any;
 }
 
 @Component({
@@ -70,11 +85,16 @@ export interface ApiUrlConfig {
       provide: NG_VALUE_ACCESSOR,
       multi:true,
       useExisting: CustomNzSelectComponent
-    }
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: CustomNzSelectComponent,
+      multi: true
+    },
   ]
 })
 
-export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, AfterContentInit, OnChanges, OnDestroy, AfterContentChecked, AfterViewInit {
+export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, AfterContentInit, OnChanges, OnDestroy, AfterContentChecked, AfterViewInit, Validator {
   static ngAcceptInputType_nzAllowClear: BooleanInput;
   static ngAcceptInputType_nzBorderless: BooleanInput;
   static ngAcceptInputType_nzShowSearch: BooleanInput;
@@ -124,6 +144,7 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
   @Input() @InputBoolean() nzAutoFocus = false;
   @Input() @InputBoolean() nzAutoClearSearchValue = true;
   @Input() @InputBoolean() nzOpen = false;
+  @Input() nzDropdownClassName: string[] | string | null = null;
 
   @Output() nzOnSearch = new EventEmitter<string>();
   @Output() nzOnBlur = new EventEmitter<void>();
@@ -145,12 +166,21 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
   };
   listOptions: any[] = [];
   currentPage = 0;
-  size = 15;
   isAll = false;
   apiCalling = false;
   total = 0;
   searchText = '';
   firstOpen = true;
+
+  static ngAcceptInputType_tableDisplay: BooleanInput;
+  @Input() tableDisplay = false;
+  @Input() tableColumns: DataRowTable[] = [];
+
+  onChangeSubs: Subscription[] = [];
+  onTouched = () => {};
+  touched = false;
+  disabled = false;
+  onChange = (value: any) => {};
 
   constructor(
     private http: HttpClient
@@ -179,12 +209,6 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
       this.renderOptions();
     });
   }
-
-  onChangeSubs: Subscription[] = [];
-  onTouched = () => {};
-
-  onChange = (value: any) => {};
-
 
   ngOnInit(): void {
     this.value.valueChanges.subscribe((value) => {
@@ -221,7 +245,6 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
 
   writeValue(value: any): void {
     this.value.patchValue(value);
-    console.log('writeValue');
   }
   registerOnChange(onChange: any): void {
     const sub = this.value.valueChanges.subscribe(onChange);
@@ -243,108 +266,6 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
     this.change.emit($event);
   }
 
-  // fetchData(): any {
-  //   this.nzOptions = [];
-  //   if (this.items === null || this.items === undefined) {
-  //     this.items = [];
-  //   }
-  //   const headers = {
-  //     'x-skip-spinner': 'true',
-  //   };
-  //   if (this.apiUrl) {
-  //     let filter = this.searchTerm ? `${this.labelName}|${FilterOperator.LIKE}|${this.searchTerm}` : '';
-  //     if (this.currentValue && !this.isOpen) {
-  //       filter = `${this.bindValue}|${FilterOperator.EQUAL}|${this.currentValue}`;
-  //     }
-  //     const params = {
-  //       page: pageIndex,
-  //       size: '10',
-  //       filter
-  //     };
-  //     this.http.get<any>(`${ this.apiUrl}`, {headers: {'x-skip-spinner': 'true'}, params})
-  //       .pipe(
-  //         finalize(() => {
-  //           // this is called on both success and error
-  //           this.isLoading = false;
-  //         })
-  //       )
-  //       .subscribe((res) => {
-  //         if (!this.handleData.observers?.length) {
-  //           if (this.config.displayCodeAndName) {
-  //             this.listOptions = this.displayCodeAndNameHandle(res.data);
-  //           } else {
-  //             this.listOptions = res.data;
-  //           }
-  //
-  //
-  //           this.total = res.meta.total ?? res.data.length;
-  //           if (this.config.sort) {
-  //             this.listOptions.sort((obj1, obj2) => {
-  //               if (obj1[this.labelName] > obj2[this.labelName]) {
-  //                 return 1;
-  //               }
-  //
-  //               if (obj1[this.labelName] < obj2[this.labelName]) {
-  //                 return -1;
-  //               }
-  //
-  //               return 0;
-  //             });
-  //           }
-  //
-  //           if (this.optionAdditional) {
-  //             this.total = this.total + this.optionAdditional.length;
-  //             this.listOptions = this.optionAdditional
-  //               .concat(this.listOptions);
-  //           }
-  //         } else {
-  //           this.handleData.emit({
-  //             data: this.optionAdditional ? this.optionAdditional
-  //               .concat(res.data) : res.data,
-  //             setData: (data: any) => {
-  //               this.listOptions = data;
-  //             },
-  //           });
-  //         }
-  //         this.listOptionsBuffer = this.listOptionsBuffer.concat(this.listOptions);
-  //         this.listOptionsBuffer = this.listOptionsBuffer.filter(
-  //           (person, index, self) =>
-  //             index === self.findIndex((p) => p[this.bindValue] === person[this.bindValue])
-  //         );
-  //         // this.listOptionsBuffer = this.listOptions.slice(0, this.bufferSize);
-  //       }, error => {
-  //         this.isLoading = false;
-  //         this.listOptions = [];
-  //       });
-  //   } else {
-  //     this.total = this.items.length;
-  //     this.listOptions = this.items;
-  //     // this.listOptions.sort((obj1, obj2) => {
-  //     //   if (obj1[this.labelName] > obj2[this.labelName]) {
-  //     //     return 1;
-  //     //   }
-  //
-  //     //   if (obj1[this.labelName] < obj2[this.labelName]) {
-  //     //     return -1;
-  //     //   }
-  //
-  //     //   return 0;
-  //     // });
-  //
-  //     if (this.optionAdditional) {
-  //       this.total = this.total + this.optionAdditional?.length;
-  //       this.listOptions = this.optionAdditional
-  //         .concat(this.listOptions.filter(e => e[this.labelName] !== this.optionAdditional.includes(o => o[this.labelName])));
-  //     }
-  //
-  //     this.listOptionsBuffer = this.listOptions.slice(0, this.bufferSize);
-  //     if (this.config.displayCodeAndName) {
-  //       this.listOptionsBuffer = this.displayCodeAndNameHandle(this.listOptionsBuffer);
-  //     }
-  //   }
-  //
-  // }
-
   scrollToEnd(): void {
     this.currentPage += 1;
     this.handleCallApi();
@@ -356,8 +277,21 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
     }
     if (this.apiUrl) {
       this.apiCalling = true;
+
+      let body = {};
+      if (this.apiConfig.paginate) {
+        body = {
+          page: this.currentPage,
+          size: this.apiConfig.size ? this.apiConfig.size : 15,
+        };
+        if (this.apiConfig.searchText) {
+          // @ts-ignore
+          body[this.apiConfig.searchText] = this.searchText;
+        }
+      }
+
       if (this.apiConfig.method === 'GET') {
-        this.http.get<[any]>(this.apiUrl).subscribe({
+        this.http.get<[any]>(this.apiUrl, {params: body}).subscribe({
           next: (value: any) => {
             this.handleDataApi(value.content, value.totalElements);
           },
@@ -369,18 +303,6 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
           }
         });
       } else {
-        let body = {};
-        if (this.apiConfig.paginate) {
-          body = {
-            page: this.currentPage,
-            size: this.size,
-          };
-          if (this.apiConfig.searchText) {
-            // @ts-ignore
-            body[this.apiConfig.searchText] = this.searchText;
-          }
-        }
-
         this.http.post<any>(this.apiUrl, body).subscribe({
           next: (value: any) => {
             this.handleDataApi(value.content, value.totalElements);
@@ -410,5 +332,37 @@ export class CustomNzSelectComponent implements ControlValueAccessor, OnInit, Af
     this.currentPage = 0;
     this.listOptions = [];
     this.handleCallApi();
+  }
+
+  openDropdown(): void {
+    this.markAsTouched();
+    console.log('openDropdown');
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+  }
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    // const value = control.value;
+    if (control.validator) {
+      this.value.setValidators(control.validator);
+    }
+    //
+    // if (this.value.valid) {
+    //   return null;
+    // }
+    // if (!value && control.hasError('required')) {
+    //   return {
+    //     required: true
+    //   };
+    // }
+    return null;
+  }
+
+  markAsTouched() {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
   }
 }
